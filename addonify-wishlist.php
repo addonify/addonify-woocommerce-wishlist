@@ -10,9 +10,9 @@
  * Plugin Name:       Addonify - WooCommerce Wishlist
  * Plugin URI:        https://wordpress.org/plugins/addonify-wishlist
  * Description:       Addonify WooCommerce Wishlist is a light-weight yet powerful tool that adds a wishlist functionality to your e-commerce shop.
- * Version:           2.0.10
+ * Version:           2.0.11
  * Requires at least: 6.3
- * Tested up to:      6.4.3
+ * Tested up to:      6.5
  * Requires PHP:      7.4
  * Author:            Addonify
  * Author URI:        https://www.addonify.com
@@ -20,6 +20,7 @@
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       addonify-wishlist
  * Domain Path:       /languages
+ * Requires Plugins:  woocommerce
  */
 
 // If this file is called directly, abort.
@@ -27,7 +28,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-define( 'ADDONIFY_WISHLIST_VERSION', '2.0.10' );
+define( 'ADDONIFY_WISHLIST_VERSION', '2.0.11' );
 define( 'ADDONIFY_WISHLIST_DB_INITIALS', 'addonify_wishlist_' );
 define( 'ADDONIFY_WISHLIST_PLUGIN_PATH', dirname( __FILE__ ) );
 define( 'ADDONIFY_WISHLIST_PLUGIN_FILE', __FILE__ );
@@ -79,20 +80,22 @@ function run_addonify_wishlist() {
 		$plugin = new Addonify_Wishlist();
 		$plugin->run();
 	} else {
-		add_action(
-			'admin_notices',
-			function() {
-				?>
-				<div class="notice notice-error is-dismissible">
-					<p>
-						<?php
-						echo wp_kses_post( __( '<b>Addonify WooCommerce Wishlist</b>  plugin is enabled but not functional. <b>WooCommerce</b> is required for it to work properly.', 'addonify-wishlist' ) );
-						?>
-					</p>
-				</div>
-				<?php
-			}
-		);
+		if ( version_compare( get_bloginfo( 'version' ), '6.5', '<' ) ) {
+			add_action(
+				'admin_notices',
+				function() {
+					?>
+					<div class="notice notice-error is-dismissible">
+						<p>
+							<?php
+							echo wp_kses_post( __( '<b>Addonify WooCommerce Wishlist</b>  plugin is enabled but not functional. <b>WooCommerce</b> is required for it to work properly.', 'addonify-wishlist' ) );
+							?>
+						</p>
+					</div>
+					<?php
+				}
+			);
+		}
 	}
 }
 add_action( 'plugins_loaded', 'run_addonify_wishlist' );

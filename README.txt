@@ -140,6 +140,15 @@ You can use this `[addonify_wishlist]` shortcode to display the wishlist table i
 
 == Changelog ==
 
+= 2.0.12 - ? August, 2024 =
+
+- Added: Shortcode for displaying wishlist icon.
+- Added: Wishlist tab in my account page.
+- Added: Option to display wishlist button over product image in product loop.
+- Removed: Unwanted files and codes.
+- Tested: WordPress version 6.6.
+- Tested: WooCommerce version 9.1.4.
+
 = 2.0.11 - 03 April, 2024 =
 
 - Tested: WordPress version 6.5.

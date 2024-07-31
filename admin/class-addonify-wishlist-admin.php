@@ -97,8 +97,6 @@ class Addonify_Wishlist_Admin {
 	 */
 	public function admin_init() {
 
-		$this->maybe_create_table();
-
 		$this->maybe_update_user_review_status();
 	}
 
@@ -231,84 +229,6 @@ class Addonify_Wishlist_Admin {
 	}
 
 	/**
-	 * Create wishlist table if it does not exists.
-	 */
-	public function maybe_create_table() {
-
-		if ( isset( $_GET['addonify-wishlist-install-table'] ) ) { // phpcs:ignore
-
-			$database_handler = new Addonify_Wishlist_Database_Handler();
-
-			$database_handler->create_table();
-
-			$database_handler->migrate_wishlist_data();
-
-			wp_safe_redirect( add_query_arg( 'addonify-wishlist-table-installed', true, admin_url() ) );
-			exit;
-		}
-	}
-
-	/**
-	 * Show table created message after table created.
-	 */
-	public function maybe_show_table_created_message() {
-
-		if ( isset( $_GET['addonify-wishlist-table-installed'] ) ) { // phpcs:ignore
-
-			$database_handler = new Addonify_Wishlist_Database_Handler();
-
-			if ( $database_handler->check_wishlist_table_exists() ) {
-				?>
-				<div class="addonify-wishlist-wp-notice notice notice-success is-dismissible" id="addonify-wishlist-upgrade-notice">
-					<p class="notice-description">
-						<?php esc_html_e( 'The Addonify WooCommerce Wishlist database update has been completed. Thank you for updating to the latest version!', 'addonify-wishlist' ); ?>
-					</p>
-					<a class="button button-primary" href="<?php echo esc_url( admin_url() ); ?>">
-						<?php esc_html_e( 'Thanks!', 'addonify-wishlist' ); ?>
-					</a>
-				</div>
-				<?php
-			} else {
-				?>
-				<div class="addonify-wishlist-wp-notice notice notice-error" id="addonify-wishlist-upgrade-notice">
-					<h3 class="notice-heading">
-						<?php esc_html_e( 'The Addonify WooCommerce Wishlist database could not be updated!', 'addonify-wishlist' ); ?>
-					</h3>
-					<p class="notice-description">
-						<?php esc_html_e( 'An error occurred while updating the Addonify WooCommerce Wishlist database. Please try again, and if the issue persists, contact the plugin support team for assistance.', 'addonify-wishlist' ); ?>
-					</p>
-					<a href="<?php echo esc_html( add_query_arg( 'addonify-wishlist-install-table', true, admin_url() ) ); ?>" class="button button-primary">
-						<?php esc_html_e( 'Update database', 'addonify-wishlist' ); ?>
-					</a>
-				</div>
-				<?php
-			}
-		}
-	}
-
-	/**
-	 * Show insert table notice on admin dashboard if not exists.
-	 */
-	public function maybe_show_insert_table_notice() {
-
-		if ( ! isset( $_GET['addonify-wishlist-table-installed'] ) ) { // phpcs:ignore
-			?>
-			<div class="addonify-wishlist-wp-notice notice notice-info" id="addonify-wishlist-upgrade-notice">
-				<h3 class="notice-heading">
-					<?php esc_html_e( 'Addonify WooCommerce Wishlist database update required!', 'addonify-wishlist' ); ?>
-				</h3>
-				<p class="notice-description">
-					<?php esc_html_e( 'Please update your database to ensure the smooth operation of the plugin. The database update process may take a few moments, so we kindly ask for your patience.', 'addonify-wishlist' ); ?>
-				</p>
-				<a href="<?php echo esc_html( add_query_arg( 'addonify-wishlist-install-table', true, admin_url() ) ); ?>" class="button button-primary">
-					<?php esc_html_e( 'Update database', 'addonify-wishlist' ); ?>
-				</a>
-			</div>
-			<?php
-		}
-	}
-
-	/**
 	 * Review notice update on user choice.
 	 */
 	public function maybe_update_user_review_status() {
@@ -359,5 +279,4 @@ class Addonify_Wishlist_Admin {
 		</div>
 		<?php
 	}
-
 }

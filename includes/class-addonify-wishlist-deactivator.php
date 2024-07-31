@@ -26,19 +26,16 @@ class Addonify_Wishlist_Deactivator {
 	 *
 	 * Long Description.
 	 *
-	 * @since    1.0.0
+	 * @since 1.0.0
 	 */
 	public static function deactivate() {
 
 		if ( get_option( ADDONIFY_WISHLIST_DB_INITIALS . 'remove_all_plugin_data_on_uninstall', false ) ) {
 
-			$database_handler = new Addonify_Wishlist_Database_Handler();
-
-			$database_handler->delete_table();
-			$database_handler->remove_wishlist_options();
+			Addonify_Wishlist_DB::delete_table();
+			Addonify_Wishlist_DB::remove_wishlist_options();
 
 			delete_user_meta( get_current_user_id(), 'addonify_wishlist_default_wishlist' );
 		}
 	}
-
 }

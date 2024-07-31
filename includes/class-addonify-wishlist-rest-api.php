@@ -191,6 +191,7 @@ if ( ! class_exists( 'Addonify_Wishlist_Rest_API' ) ) {
 		 * @return json $return_data   \WP_REST_Response The response object.
 		 */
 		public function rest_handler_reset_options( $request ) {
+
 			global $wpdb;
 
 			$option_keys = array_keys( addonify_wishlist_v_2_settings_fields() );

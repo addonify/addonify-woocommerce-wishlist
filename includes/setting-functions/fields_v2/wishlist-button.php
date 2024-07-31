@@ -24,11 +24,13 @@ if ( ! function_exists( 'addonify_wishlist_wishlist_button_v_2_options' ) ) {
 					'btn_position'                => array(
 						'type'        => 'select',
 						'className'   => '',
-						'label'       => __( 'Add to Wishlist button position', 'addonify-wishlist' ),
+						'label'       => __( 'Add to Wishlist button position on product loop', 'addonify-wishlist' ),
 						'description' => __( 'Choose where in the product loop of the product catalog you would like the "Add to Wishlist" button to be displayed.', 'addonify-wishlist' ),
 						'choices'     => array(
+							'none'               => __( 'None', 'addonify-wishlist' ),
 							'after_add_to_cart'  => __( 'After Add to Cart Button', 'addonify-wishlist' ),
 							'before_add_to_cart' => __( 'Before Add to Cart Button', 'addonify-wishlist' ),
+							'over_image'         => esc_html__( 'Over Product Image', 'addonify-wishlist' ),
 						),
 						'dependent'   => array( 'enable_wishlist' ),
 						'value'       => addonify_wishlist_get_option( 'btn_position' ),
@@ -39,6 +41,7 @@ if ( ! function_exists( 'addonify_wishlist_wishlist_button_v_2_options' ) ) {
 						'label'       => __( 'Add to Wishlist button position on product single', 'addonify-wishlist' ),
 						'description' => __( 'Choose where in the add to cart form of product singble you would like the "Add to Wishlist" button to be displayed.', 'addonify-wishlist' ),
 						'choices'     => array(
+							'none'                      => __( 'None', 'addonify-wishlist' ),
 							'before_add_to_cart_form'   => __( 'Before Add to Cart Form', 'addonify-wishlist' ),
 							'before_add_to_cart_button' => __( 'Before Add to Cart Button', 'addonify-wishlist' ),
 							'after_add_to_cart_button'  => __( 'After Add to Cart Button', 'addonify-wishlist' ),

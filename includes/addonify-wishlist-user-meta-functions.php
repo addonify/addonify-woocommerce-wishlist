@@ -92,6 +92,8 @@ if ( ! function_exists( 'addonify_wishlist_set_user_default_wishlist_in_meta' ) 
 			}
 		}
 	}
+
+	add_action( 'addonify_wishlist__wishlist_created', 'addonify_wishlist_set_user_default_wishlist_in_meta', 10, 2 );
 }
 
 

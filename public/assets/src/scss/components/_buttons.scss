@@ -1,7 +1,6 @@
 /* --------------------------------------------------------------------------
 	#. Button General
   -------------------------------------------------------------------------- */
-
 .adfy-wishlist-btn {
 
     fill: var(--adfy_wishlist_wishlist_btn_text_color);
@@ -72,7 +71,18 @@ p.adfy-wishlist-btn .button,
     }
 }
 
+body.addonify-wishlist-btn-over-image .woocommerce-LoopProduct-link,
+body.addonify-wishlist-btn-over-image .wc-block-product {
 
+    position: relative;
+
+    .addonify-add-to-wishlist-btn {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        z-index: 2;
+    }
+}
 /**
 *
 * Clear shortcode button style.
@@ -193,3 +203,47 @@ p.adfy-wishlist-btn .button,
     padding: 10px 15px;
     border-radius: 2px;
 }
+
+.adfy-wishlist-btn-icon {
+    line-height: 0;
+}
+
+/*
+Shortcode Wishlist Icon
+*/
+.adfy_wishlist-icon-shortcode-btn {
+
+    line-height: 1;
+    position: relative;
+
+    .icon svg {
+        height: 20px;
+        width: 20px;
+    }
+
+    .badge {
+        align-items: center;
+        background-color: #000;
+        border-radius: 20px;
+        box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
+        color: #fff;
+        display: inline-flex;
+        font-size: 12px;
+        height: 23px;
+        justify-content: center;
+        line-height: 1;
+        position: absolute;
+        top: -15px;
+        transition: all 0.5s ease-in-out;
+        width: 23px;
+
+        &.top-right {
+            right: -15px;
+        }
+
+        &.top-left {
+            left: -15px;
+        }
+    }
+}
+

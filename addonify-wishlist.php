@@ -30,7 +30,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 define( 'ADDONIFY_WISHLIST_VERSION', '2.0.11' );
 define( 'ADDONIFY_WISHLIST_DB_INITIALS', 'addonify_wishlist_' );
-define( 'ADDONIFY_WISHLIST_PLUGIN_PATH', dirname( __FILE__ ) );
+define( 'ADDONIFY_WISHLIST_PLUGIN_PATH', __DIR__ );
 define( 'ADDONIFY_WISHLIST_PLUGIN_FILE', __FILE__ );
 define( 'ADDONIFY_WISHLIST_BASENAME', plugin_basename( __FILE__ ) );
 
@@ -65,25 +65,18 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-addonify-wishlist.php';
 require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
 require_once plugin_dir_path( __FILE__ ) . 'admin/app.php';
 
-/**
- * Begins execution of the plugin.
- *
- * Since everything within the plugin is registered via hooks,
- * then kicking off the plugin from this point in the file does
- * not affect the page life cycle.
- *
- * @since    1.0.0
- */
-function run_addonify_wishlist() {
+if ( ! function_exists( 'addonify_wishlist_admin_notices' ) ) {
 
-	if ( class_exists( 'WooCommerce' ) ) {
-		$plugin = new Addonify_Wishlist();
-		$plugin->run();
-	} else {
-		if ( version_compare( get_bloginfo( 'version' ), '6.5', '<' ) ) {
+	function addonify_wishlist_admin_notices() {
+
+		if (
+			! class_exists( 'WooCommerce' ) &&
+			version_compare( get_bloginfo( 'version' ), '6.5', '<' )
+		) {
+
 			add_action(
 				'admin_notices',
-				function() {
+				function () {
 					?>
 					<div class="notice notice-error is-dismissible">
 						<p>
@@ -97,5 +90,22 @@ function run_addonify_wishlist() {
 			);
 		}
 	}
+
+	add_action( 'plugins_loaded', 'addonify_wishlist_admin_notices' );
 }
-add_action( 'plugins_loaded', 'run_addonify_wishlist' );
+
+/**
+ * Begins execution of the plugin.
+ *
+ * Since everything within the plugin is registered via hooks,
+ * then kicking off the plugin from this point in the file does
+ * not affect the page life cycle.
+ *
+ * @since    1.0.0
+ */
+function run_addonify_wishlist() {
+
+	$plugin = new Addonify_Wishlist();
+	$plugin->run();
+}
+run_addonify_wishlist();

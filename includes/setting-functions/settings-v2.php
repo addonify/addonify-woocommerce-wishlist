@@ -41,6 +41,7 @@ if ( ! function_exists( 'addonify_wishlist_v_2_settings_defaults' ) ) {
 				'require_login'                            => false,
 				'if_not_login_action'                      => 'default',
 				'remove_from_wishlist_if_added_to_cart'    => true,
+				'enable_wishlist_on_myaccount_page'        => false,
 				'btn_position'                             => 'before_add_to_cart',
 				'btn_position_on_single'                   => 'after_add_to_cart_form',
 				'btn_label'                                => esc_html__( 'Add to wishlist', 'addonify-wishlist' ),

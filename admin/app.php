@@ -13,7 +13,7 @@ use Kucrut\Vite;
 /**
 *
 * Enqueue admin scripts if the current page is addonify wishlist page.
-* 
+*
 * @since 2.0.0
 */
 
@@ -23,11 +23,11 @@ if ( isset( $_GET['page'] ) && 'addonify_wishlist' === $_GET['page'] ) { //phpcs
 		'admin_enqueue_scripts',
 		function () use ( $handle ): void {
 			Vite\enqueue_asset(
-				dirname( __FILE__ ) . '/app/dist',
+				__DIR__ . '/app/dist',
 				'admin/app/src/main.js',
 				array(
 					'handle'           => $handle,
-					'dependencies'     => array('lodash', 'wp-api-fetch', 'wp-i18n'), // Dependencies.
+					'dependencies'     => array( 'lodash', 'wp-api-fetch', 'wp-i18n' ), // Dependencies.
 					'css-dependencies' => array(), // Optional style dependencies. Defaults to empty array.
 					'css-media'        => 'all', // Optional.
 					'css-only'         => false, // Optional. Set to true to only load style assets in production mode.

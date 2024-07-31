@@ -18,7 +18,7 @@
  * @package    Addonify_Wishlist
  * @subpackage Addonify_Wishlist/includes
  */
-trait Addonify_Wishlist_Database_Trait {
+trait Addonify_Wishlist_DB_Trait {
 
 	/**
 	 * CMPriceAction database prefix.
@@ -81,90 +81,103 @@ trait Addonify_Wishlist_Database_Trait {
 	 * Retrive a row data from the table.
 	 *
 	 * @since 1.0.0
-	 * @param array $where Condition array.
-	 * @return object Row data.
+	 *
+	 * @param array $args Arguments.
+	 * @return object
 	 */
-	public static function get_row( $where ) {
-
-		if ( empty( $where ) ) {
-			return false;
-		}
+	public static function get_row( $args = array() ) {
 
 		global $wpdb;
 
+		$defaults = array(
+			'fields' => array(),
+			'where'  => array(),
+		);
+
+		$args = wp_parse_args( $args, $defaults );
+
 		$table_name = self::get_table_name();
 
-		$sql  = "SELECT * FROM {$table_name} WHERE ";
-		$data = array();
-		foreach ( $where as $index => $val ) {
-			$sql .= " {$index} = ";
-			$sql .= is_numeric( $val ) ? '%d ' : '%s ';
-			$sql .= ' AND ';
-
-			$data[] = wp_unslash( $val );
+		// Building SELECT fields.
+		$fields = '*';
+		if ( ! empty( $args['fields'] ) && is_array( $args['fields'] ) ) {
+			$fields = implode( ',', array_map( 'esc_sql', $args['fields'] ) );
 		}
-		$sql = substr( $sql, 0, -5 );
 
-		return $wpdb->get_row( $wpdb->prepare( $sql, $data ) ); //phpcs:ignore
+		$sql = "SELECT {$fields} FROM {$table_name} WHERE 1 = 1";
+
+		// Building WHERE clause.
+		if ( ! empty( $args['where'] ) && is_array( $args['where'] ) ) {
+			foreach ( $args['where'] as $field => $value ) {
+				if ( is_null( $value ) ) {
+					$sql .= " AND {$field} IS NULL"; // phpcs:ignore
+				} else {
+					$sql .= " AND {$field} = '{$value}'"; // phpcs:ignore
+				}
+			}
+		}
+
+		return $wpdb->get_row( $sql ); //phpcs:ignore
 	}
 
 	/**
 	 * Get Rows with provided field name and value
 	 *
-	 * @param array  $fields Fields to be compared.
-	 * @param string $order_by Order Results.
-	 * @param int    $limit Limit value.
-	 * @param int    $offset Offset value.
-	 * @return object
+	 * @param array $args Arguments.
+	 * @return array
 	 */
-	public static function get_rows( $fields, $order_by = 'DESC', $limit = false, $offset = 0 ) {
+	public static function get_rows( $args ) {
 
 		global $wpdb;
 
+		$defaults = array(
+			'fields'   => array(), // Fields to select.
+			'where'    => array(), // WHERE conditions.
+			'order_by' => 'id', // Default order by field.
+			'order'    => 'DESC', // Order direction.
+			'limit'    => 0, // Limit of records.
+			'offset'   => 0, // Offset for records.
+		);
+
+		$args = wp_parse_args( $args, $defaults );
+
 		$table_name = self::get_table_name();
-		$where      = '';
-		$limit_     = '';
-		$order_by_  = '';
 
-		if ( is_array( $fields ) ) {
+		// Building SELECT fields.
+		$fields = '*';
+		if ( ! empty( $args['fields'] ) && is_array( $args['fields'] ) ) {
+			$fields = implode( ',', array_map( 'esc_sql', $args['fields'] ) );
+		}
 
-			$fields_count = count( $fields );
+		$sql = "SELECT {$fields} FROM {$table_name} WHERE 1 = 1";
 
-			$where = ' WHERE ';
-
-			$counter = 1;
-
-			foreach ( $fields as $field_id => $field_value ) {
-
-				if ( null === $field_value ) {
-					$where .= "{$field_id} IS NULL";
+		// Building WHERE clause.
+		if ( ! empty( $args['where'] ) && is_array( $args['where'] ) ) {
+			foreach ( $args['where'] as $field => $value ) {
+				if ( is_null( $value ) ) {
+					$sql .= " AND {$field} IS NULL"; // phpcs:ignore
 				} else {
-					$where .= "{$field_id} = '{$field_value}'";
+					$sql .= " AND {$field} = '{$value}'"; // phpcs:ignore
 				}
-
-				if ( $counter < $fields_count ) {
-					$where .= ' AND ';
-				}
-
-				$counter++;
-			}
-
-			if ( in_array( strtolower( $order_by ), array( 'asc', 'desc' ), true ) ) {
-				$order_by_ = ' ORDER BY id ' . strtoupper( $order_by );
-			}
-
-			if ( $limit ) {
-				$limit_ = " LIMIT {$offset}, {$limit}";
 			}
 		}
 
-		$query_statement = "SELECT * FROM {$table_name} {$where} {$order_by_}";
+		// Building ORDER BY clause.
+		$order_by = esc_sql( $args['order_by'] );
+		$order    = strtoupper( $args['order'] ) === 'ASC' ? 'ASC' : 'DESC';
 
-		if ( ! empty( $limit_ ) ) {
-			$query_statement = "SELECT * FROM {$table_name} {$where} {$order_by_} {$limit_}";
+		$sql .= " ORDER BY {$order_by} {$order}";
+
+		// Building LIMIT clause.
+		$limit = '';
+		if ( $args['limit'] > 0 ) {
+			$sql = "LIMIT {$args['limit']} OFFSET {$args['offset']}";
 		}
 
-		return $wpdb->get_results( $query_statement ); //phpcs:ignore
+		// Execute the query.
+		$results = $wpdb->get_results( $sql ); // phpcs:ignore
+
+		return $results;
 	}
 
 	/**

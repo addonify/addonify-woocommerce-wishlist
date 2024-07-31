@@ -106,6 +106,7 @@
                     if (data.hasOwnProperty('itemsCount')) {
                         initializeAddonifyWishlist.updateWishlistSidebarElements(data.itemsCount);
                         initializeAddonifyWishlist.updateWishlistTableElements(data.itemsCount);
+                        initializeAddonifyWishlist.updateWishlistIconElements(data.itemsCount);
                     }
                 });
 
@@ -141,6 +142,7 @@
                     if (data.hasOwnProperty('itemsCount')) {
                         initializeAddonifyWishlist.updateWishlistSidebarElements(data.itemsCount);
                         initializeAddonifyWishlist.updateWishlistTableElements(data.itemsCount);
+                        initializeAddonifyWishlist.updateWishlistIconElements(data.itemsCount);
                     }
 
                     // Displays the product removal and undo notice.
@@ -156,6 +158,7 @@
                     initializeAddonifyWishlist.renderUndoNotice(false);
                     initializeAddonifyWishlist.updateWishlistSidebarElements(0);
                     initializeAddonifyWishlist.updateWishlistTableElements(0);
+                    initializeAddonifyWishlist.updateWishlistIconElements(0);
                 });
             },
             updateWishlistButtons: function (buttonElement, buttonStatus, wishlistId = '', wishlistName = '') {
@@ -306,6 +309,11 @@
                         wishlistTableFormEle.addClass('adfy-wishlist-hide').removeClass('adfy-wishlist-show');
                         wishlistEmptyParaEle.addClass('adfy-wishlist-show').removeClass('adfy-wishlist-hide');
                     }
+                }
+            },
+            updateWishlistIconElements: function (itemsCount) {
+                if ($('.adfy_wishlist-icon-shortcode-btn').length > 0 ) {
+                    $('.adfy_wishlist-icon-shortcode-btn').find('.adfy_wishlist-icon-items-count').text(itemsCount);
                 }
             },
             undoEvent: function () {

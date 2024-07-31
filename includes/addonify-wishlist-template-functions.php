@@ -26,7 +26,7 @@ if ( ! function_exists( 'addonify_wishlist_locate_template' ) ) {
 
 		// Set default plugin templates path.
 		if ( ! $default_path ) :
-			$default_path = plugin_dir_path( dirname( __FILE__ ) ) . 'public/templates/'; // Path to the template folder.
+			$default_path = plugin_dir_path( __DIR__ ) . 'public/templates/'; // Path to the template folder.
 		endif;
 
 		// Search template file in theme folder.

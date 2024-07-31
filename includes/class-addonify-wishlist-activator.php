@@ -28,9 +28,9 @@ class Addonify_Wishlist_Activator {
 	 */
 	public static function activate() {
 
-		require_once ADDONIFY_WISHLIST_PLUGIN_PATH . 'includes/classes/class-addonify-wishlist-trait.php';
+		require_once ADDONIFY_WISHLIST_PLUGIN_PATH . '/includes/classes/addonify-wishlist-db-trait.php';
 
-		require_once ADDONIFY_WISHLIST_PLUGIN_PATH . 'includes/classes/class-addonify-wishlist-db.php';
+		require_once ADDONIFY_WISHLIST_PLUGIN_PATH . '/includes/classes/class-addonify-wishlist-db.php';
 
 		if ( ! Addonify_Wishlist_DB::table_exists() ) {
 			Addonify_Wishlist_DB::create_table();

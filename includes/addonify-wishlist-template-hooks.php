@@ -28,4 +28,3 @@ add_action(
 );
 
 add_action( 'addonify_wishlist_render_modal_template', 'addonify_wishlist_modal_content_template' );
-

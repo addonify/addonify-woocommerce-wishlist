@@ -1,10 +1,10 @@
 === Addonify - WooCommerce Wishlist ===
 
 Contributors: addonify
-Tags: wishlist, woocommerce wishlist, product wishlist, woocommerce, ecommerce, e-commerce
+Tags: wishlist, woocommerce wishlist, product wishlist, add to wishlist, save for later
 Requires at least: 6.3
-Tested up to: 6.5
-Stable tag: 2.0.11
+Tested up to: 6.6
+Stable tag: 2.0.12
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -47,13 +47,14 @@ The primary goal of the Addonify Wishlist plugin is to allow website visitors to
 - Custom label & icon for sidebar drawer trigger button.
 - Save for later button on WooCommerce cart table.
 - Shortcode that can use used anywhere to display the wishlist.
+- Shortcode to display wishlist icon with wishlist items count.
+- Shortcode to display custom wishlist button.
 - Require login before a user can add products to wishlist.
 - Remove item from wishlist immediately after it has been added to cart.
 - Redirect to checkout page immediately if an item is added to cart.
 - Add to wishlist and remove from wishlist functionality with/without ajax call.
 - Add to cart functionality with/without ajax call.
 - Color option for "Add to Wishlist" button.
-- Shortcode that can be used to display the wishlist in any page.
 - Option to reset all settings.
 - Option to export all options.
 - Option to import all options.
@@ -119,6 +120,14 @@ Yes, Addonify Wishlist should work with all WordPress themes. But it might not w
 
 You can use this `[addonify_wishlist]` shortcode to display the wishlist table in any page.
 
+= How can I display wishlist icon in the header? =
+
+Use `[addonify_wishlist_icon]` shortcode to display wishlist icon in the header. Shortcode attributes `id`, `class`, `display_badge`, and `badge_position` are available. The attribute `display_badge` can be used to display wishlist items count and `badge_position` can be used to position the badge. The available positions for `badge_position` are `top-right` and `top-left`.
+
+= Is there shortcode to display wishlist button? =
+
+Yes, there is. Use `[addonify_wishlist_button]` shortocde to display wishlist button. The available shortcode attributes are `product_id`, `button_label`, `added_to_wishlist_button_label`, `already_in_wishlist_button_label`, `classes`, and `button_icon_position`. For the attribute `button_icon_position`, you can use `none`, `left`, or `right`. You can also use the shortcode to display wishlist button in a product loop.
+
 == Installation ==
 
 1. Download the plugin.
@@ -139,6 +148,17 @@ You can use this `[addonify_wishlist]` shortcode to display the wishlist table i
 9. Save for later (Add to wishlist) button in cart page.
 
 == Changelog ==
+
+= 2.0.12 - 6 August, 2024 =
+
+- Fixes: User wishlist not being created when logging in and issue on adding product into the wishlist. [GitHub Issue 435](https://github.com/addonify/addonify-wishlist/issues/435). 
+- Added: Shortcode for displaying wishlist icon.
+- Added: Wishlist tab in my account page.
+- Added: Option to display wishlist button over product image in product loop.
+- Updated: Plugin tags issue. [GitHub Issue 439](https://github.com/addonify/addonify-wishlist/issues/439).
+- Removed: Unwanted files and codes.
+- Tested: WordPress version 6.6.
+- Tested: WooCommerce version 9.1.4.
 
 = 2.0.11 - 03 April, 2024 =
 

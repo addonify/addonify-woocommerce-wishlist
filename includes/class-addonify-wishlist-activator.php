@@ -28,31 +28,12 @@ class Addonify_Wishlist_Activator {
 	 */
 	public static function activate() {
 
-		require plugin_dir_path( dirname( __FILE__ ) ) . 'includes/addonify-wishlist-user-meta-functions.php';
+		require_once ADDONIFY_WISHLIST_PLUGIN_PATH . '/includes/classes/addonify-wishlist-db-trait.php';
 
-		require plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-addonify-wishlist-database-handler.php';
+		require_once ADDONIFY_WISHLIST_PLUGIN_PATH . '/includes/classes/class-addonify-wishlist-db.php';
 
-		require plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-addonify-wishlist-handler.php';
-
-		$database_handler = new Addonify_Wishlist_Database_Handler();
-
-		$wishlist_table_exists = $database_handler->check_wishlist_table_exists();
-
-		if ( ! $wishlist_table_exists ) {
-
-			$database_handler->create_table();
-
-			$database_handler->migrate_wishlist_data( get_current_user_id() );
-		} else {
-
-			$database_handler->delete_where( array( 'user_id' => 0 ) );
-
-			$wishlist_handler = Addonify_Wishlist_Handler::get_instance();
-
-			if ( ! $wishlist_handler->get_default_wishlist_id( get_current_user_id() ) ) {
-				$database_handler = new Addonify_Wishlist_Database_Handler();
-				$database_handler->migrate_wishlist_data( get_current_user_id() );
-			}
+		if ( ! Addonify_Wishlist_DB::table_exists() ) {
+			Addonify_Wishlist_DB::create_table();
 		}
 
 		self::create_wishlist_page();
@@ -69,12 +50,11 @@ class Addonify_Wishlist_Activator {
 		// do not regenerate even if plugin is deleted by user.
 
 		if ( get_option( ADDONIFY_WISHLIST_DB_INITIALS . 'wishlist_page' ) ) {
-
 			return;
 		}
 
 		$args = array(
-			'pagename' => __( 'Wishlist', 'addonify-wishlist' ),
+			'pagename' => esc_html__( 'Wishlist', 'addonify-wishlist' ),
 		);
 
 		$query = new WP_Query( $args );
@@ -85,7 +65,7 @@ class Addonify_Wishlist_Activator {
 
 		// Create page object.
 		$new_page = array(
-			'post_title'   => __( 'Wishlist', 'addonify-wishlist' ),
+			'post_title'   => esc_html__( 'Wishlist', 'addonify-wishlist' ),
 			'post_content' => '[addonify_wishlist]',
 			'post_status'  => 'publish',
 			'post_author'  => get_current_user_id(),
@@ -96,6 +76,5 @@ class Addonify_Wishlist_Activator {
 		$page_id = wp_insert_post( $new_page );
 
 		update_option( ADDONIFY_WISHLIST_DB_INITIALS . 'wishlist_page', $page_id );
-
 	}
 }

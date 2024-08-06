@@ -124,22 +124,14 @@ if ( ! function_exists( 'addonify_wishlist_get_wishlist_items' ) ) {
 	 */
 	function addonify_wishlist_get_wishlist_items() {
 
-		$wishlist_handler = Addonify_Wishlist_Handler::get_instance();
+		$wishlist_handler = new Addonify_Wishlist_Actions(
+			[ // phpcs:ignore
+				'user_id'  => get_current_user_id(),
+				'site_url' => get_site_url(),
+			]
+		);
 
-		$wishlist_data = $wishlist_handler->get_user_wishlists_data( get_current_user_id() );
-
-		$wishlist_items = array();
-
-		if ( $wishlist_data ) {
-
-			$default_wishlist_id = array_key_first( $wishlist_data );
-
-			if ( isset( $wishlist_data[ $default_wishlist_id ]['product_ids'] ) ) {
-				$wishlist_items = $wishlist_data[ $default_wishlist_id ]['product_ids'];
-			}
-		}
-
-		return $wishlist_items;
+		return $wishlist_handler->get_wishlist_items();
 	}
 }
 

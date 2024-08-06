@@ -122,7 +122,7 @@ You can use this `[addonify_wishlist]` shortcode to display the wishlist table i
 
 = How can I display wishlist icon in the header? =
 
-User `[addonify_wishlist_icon]` shortcode to display wishlist icon in the header. Shortcode attributes `id`, `class`, `display_badge`, and `badge_position` are available. The attribute `display_badge` can be used to display wishlist items count and `badge_position` can be used to position the badge. The available positions for `badge_position` are `top-right` and `top-left`.
+Use `[addonify_wishlist_icon]` shortcode to display wishlist icon in the header. Shortcode attributes `id`, `class`, `display_badge`, and `badge_position` are available. The attribute `display_badge` can be used to display wishlist items count and `badge_position` can be used to position the badge. The available positions for `badge_position` are `top-right` and `top-left`.
 
 = Is there shortcode to display wishlist button? =
 

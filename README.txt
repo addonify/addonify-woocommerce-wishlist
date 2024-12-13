@@ -154,8 +154,6 @@ Yes, there is. Use `[addonify_wishlist_button]` shortocde to display wishlist bu
 - Tested: WordPress version 6.7.1
 - Tested: WooCommerce version 9.4.3
 
-== Changelog ==
-
 = 2.0.12 - 6 August, 2024 =
 
 - Fixes: User wishlist not being created when logging in and issue on adding product into the wishlist. [GitHub Issue 435](https://github.com/addonify/addonify-wishlist/issues/435).

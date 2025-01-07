@@ -13,35 +13,36 @@
 defined( 'ABSPATH' ) || exit;
 
 ?>
-<div id="addonify-wishlist-sticky-sidebar-overlay"></div>
-<div id="addonify-wishlist-sticky-sidebar-container" class="<?php echo esc_attr( $css_class ); ?>">
+<div id="adfy-wl-sidebar-overlay"></div>
+<div id="adfy-wl-sidebar-container" class="<?php echo esc_attr( $css_class ); ?>">
 	<?php do_action( 'addonify_wishlist_after_sidebar_opening_tag' ); ?>
-	<div class="addonify-wishlist-ssc-body">
-		<div class="addonify-wishlist-scs-header">
-			<h3 id="addonify-wishlist-title" class="adfy-wishlist-sidebar-title">
+	<div class="adfy-wl-ssc-body">
+		<div class="adfy-wl-ssc-header">
+			<h3 id="adfy-wl-sidebar-wl-title" class="adfy-wl-sidebar-title">
 				<?php echo esc_html( $title ); ?>
 			</h3>
 			<?php do_action( 'addonify_wishlist_after_sidebar_title' ); ?>
-			<button id="close-adfy-wishlist-sidebar-button" class="button">
+			<button id="adfy-wl-sidebar-close-btn">	
+				<span class="screen-reader-text"><?php esc_html_e( 'Close wishlist sidebar', 'addonify-wishlist' ); ?></span>
 				<?php echo addonify_wishlist_escape_svg( addonify_wishlist_get_wishlist_icons( 'close-2' ) ); // phpcs:ignore ?>
 			</button>
 		</div>
 
-		<div id="addonify-wishlist-notice" class="addonify-wishlist-notice"></div>
+		<div id="adfy-wl-notice" class="adfy-wl-notice"></div>
 
-		<form action="" method="POST" id="addonify-wishlist-sidebar-form">
-			<?php do_action( 'addonify_wishlist_before_wishlist_form_table' ); ?>
-			<div id="addonify-wishlist-sidebar-items-wrapper">
-				<?php do_action( 'addonify_wishlist_render_sidebar_loop', $product_ids ); ?>
+		<form action="" method="POST" id="adfy-wl-sidebar-form">
+			<?php do_action( 'addonify_wishlist_before_sidebar_wishlist_form_table' ); ?>
+			<div id="adfy-wl-sidebar-items">
+				<?php do_action( 'addonify_wishlist_sidebar_products', $product_ids ); ?>
 			</div>
-			<?php do_action( 'addonify_wishlist_after_wishlist_form_table' ); ?>
+			<?php do_action( 'addonify_wishlist_after_sidebar_wishlist_form_table' ); ?>
 		</form>
 	</div>
 	<?php
 	if ( $view_wishlist_page_button_label ) {
 		?>
-		<div class="addonify-wishlist-ssc-footer">
-			<a id="addonify-wishlist-wishlist-page-link" href="<?php echo esc_url( $wishlist_url ); ?>" class="addonify-wishlist-goto-wishlist-btn">
+		<div class="adfy-wl-ssc-footer">
+			<a id="adfy-wl-wishlist-page-link" href="<?php echo esc_url( apply_filters( 'addonify_wishlist_sidebar_wishlist_page_url', $wishlist_url ) ); ?>" class="adfy-wl-wishlist-page-link-btn">
 				<?php echo esc_html( $view_wishlist_page_button_label ); ?>
 				<span class="icon">
 					<svg viewBox="0 0 64 64" xml:space="preserve">

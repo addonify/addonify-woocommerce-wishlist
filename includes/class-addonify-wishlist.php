@@ -134,6 +134,8 @@ class Addonify_Wishlist {
 
 		require_once ADDONIFY_WISHLIST_PLUGIN_PATH . '/includes/addonify-wishlist-helper-functions.php';
 
+		require_once ADDONIFY_WISHLIST_PLUGIN_PATH . '/includes/class-addonify-wishlist-template-loader.php';
+
 		require_once ADDONIFY_WISHLIST_PLUGIN_PATH . '/includes/addonify-wishlist-template-functions.php';
 
 		require_once ADDONIFY_WISHLIST_PLUGIN_PATH . '/includes/addonify-wishlist-template-hooks.php';

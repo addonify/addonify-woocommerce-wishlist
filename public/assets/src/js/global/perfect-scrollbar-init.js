@@ -13,7 +13,7 @@ const helpers = {
 
         if (typeof PerfectScrollbar === 'function') {
 
-            const wishlistSidebarScrollableEle = document.getElementById('addonify-wishlist-sidebar-form');
+            const wishlistSidebarScrollableEle = document.getElementById('adfy-wl-sidebar-form');
 
             if (wishlistSidebarScrollableEle) {
 

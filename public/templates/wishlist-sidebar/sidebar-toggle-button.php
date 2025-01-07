@@ -13,7 +13,7 @@
 defined( 'ABSPATH' ) || exit;
 ?>
 
-<button id="addonify-wishlist-show-sidebar-btn" class="adfy-wishlist-clear-button-style <?php echo esc_attr( $css_classes ); ?>">
+<button id="adfy-wl-sidebar-toggle-btn" class="adfy-wl-clear-btn-style <?php echo esc_attr( $css_classes ); ?>">
 	<?php
 	if ( $show_icon ) {
 		?>

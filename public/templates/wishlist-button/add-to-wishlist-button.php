@@ -9,12 +9,12 @@
  * @subpackage Addonify_Wishlist/public/templates
  */
 
-// direct access is disabled.
-defined( 'ABSPATH' ) || exit;
-
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 ?>
 <button
-	class="button adfy-wishlist-btn addonify-add-to-wishlist-btn addonify-wishlist-ajax-add-to-wishlist <?php echo esc_attr( implode( ' ', $classes ) ); ?>" 
+	class="button adfy-wl-btn adfy-wl-add-to-wishlist adfy-wl-ajax-add-to-wishlist <?php echo esc_attr( implode( ' ', $classes ) ); ?>" 
 	data-product_id="<?php echo esc_attr( $product->get_id() ); ?>"
 	data-product_name="<?php echo esc_attr( $product->get_name() ); ?>"
 	<?php
@@ -28,13 +28,13 @@ defined( 'ABSPATH' ) || exit;
 	<?php
 	if ( $button_label ) {
 		?>
-		<span class="addonify-wishlist-btn-label"><?php echo esc_html( $button_label ); ?></span>
+		<span class="adfy-wl-add-to-wislist-label"><?php echo esc_html( $button_label ); ?></span>
 		<?php
 	}
 
 	if ( isset( $button_icon ) ) {
 		?>
-		<span class="adfy-wishlist-btn-icon">
+		<span class="adfy-wl-btn-icon">
 			<?php echo addonify_wishlist_escape_svg( $button_icon ); // phpcs:ignore ?>
 		</span>
 		<?php

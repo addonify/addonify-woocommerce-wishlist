@@ -290,6 +290,17 @@ trait Addonify_Wishlist_DB_Trait {
 		return $wpdb->get_results( 'show tables', ARRAY_A ); //phpcs:ignore
 	}
 
+	public static function query( $query ) {
+
+		global $wpdb;
+
+		$table_name = self::get_table_name();
+
+		$query = str_replace( '{table_name}', $table_name, $query );
+
+		return $wpdb->query( $query );
+	}
+
 	/**
 	 * Insert multiple rows in table.
 	 *

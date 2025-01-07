@@ -1,7 +1,8 @@
 /* --------------------------------------------------------------------------
 	#. Button General
   -------------------------------------------------------------------------- */
-.adfy-wishlist-btn {
+.adfy-wl-btn,
+.adfy-wl-btn {
 
     fill: var(--adfy_wishlist_wishlist_btn_text_color);
     color: var(--adfy_wishlist_wishlist_btn_text_color);
@@ -24,8 +25,8 @@
     }
 }
 
-p.adfy-wishlist-btn .button,
-.adfy-wishlist-btn:not(p.adfy-wishlist-btn) {
+p.adfy-wl-btn .button,
+.adfy-wl-btn:not(p.adfy-wl-btn) {
 
     display: inline-flex;
     align-items: center;
@@ -48,7 +49,7 @@ p.adfy-wishlist-btn .button,
         border-color: transparent;
     }
 
-    &.adfy-wishlist-clear-button-style {
+    &.adfy-wl-clear-btn-style {
 
         padding: 0;
         margin: 0;
@@ -76,7 +77,7 @@ body.addonify-wishlist-btn-over-image .wc-block-product {
 
     position: relative;
 
-    .addonify-add-to-wishlist-btn {
+    .adfy-wl-add-to-wishlist {
         position: absolute;
         right: 10px;
         top: 10px;
@@ -91,7 +92,7 @@ body.addonify-wishlist-btn-over-image .wc-block-product {
 * @since: 1.1.1
 */
 
-.adfy-wishlist-clear-shortcode-button-style.woocommerce.product {
+.adfy-wl-shortcode-btn.woocommerce.product {
 
     display: inline-flex;
     flex-direction: row;
@@ -147,16 +148,15 @@ body.addonify-wishlist-btn-over-image .wc-block-product {
 	#. Add to Wishlist button
   -------------------------------------------------------------------------- */
 
-.addonify-add-to-wishlist-btn,
-.addonify-wishlist-add-to-cart .button,
-.addonify-wishlist-add-to-cart .added_to_cart,
-.woocommerce .shop_table .addonify-add-to-wishlist-btn,
-#addonify-wishlist-page-form .adfy-wishlist-btn .button,
-.woocommerce ul.products li.product a.addonify-add-to-wishlist-btn
-.woocommerce ul.products li.product button.addonify-add-to-wishlist-btn,
-.woocommerce-page ul.products li.product a.addonify-add-to-wishlist-btn,
-.woocommerce-page ul.products li.product button.addonify-add-to-wishlist-btn,
-.woocommerce-page .product .summary button.addonify-add-to-wishlist-btn {
+.adfy-wl-add-to-wishlist,
+.adfy-wl-add-to-cart .button,
+.adfy-wl-add-to-cart .added_to_cart,
+.woocommerce .shop_table .adfy-wl-add-to-wishlist,
+.woocommerce ul.products li.product a.adfy-wl-add-to-wishlist
+.woocommerce ul.products li.product button.adfy-wl-add-to-wishlist,
+.woocommerce-page ul.products li.product a.adfy-wl-add-to-wishlist,
+.woocommerce-page ul.products li.product button.adfy-wl-add-to-wishlist,
+.woocommerce-page .product .summary button.adfy-wl-add-to-wishlist {
 
     display: inline-flex;
     gap: 5px;
@@ -197,14 +197,14 @@ body.addonify-wishlist-btn-over-image .wc-block-product {
     }
 }
 
-.addonify-wishlist-add-to-cart .button,
-.addonify-wishlist-add-to-cart .added_to_cart {
+.adfy-wl-add-to-cart .button,
+.adfy-wl-add-to-cart .added_to_cart {
 
     padding: 10px 15px;
     border-radius: 2px;
 }
 
-.adfy-wishlist-btn-icon {
+.adfy-wl-btn-icon {
     line-height: 0;
 }
 
@@ -245,5 +245,11 @@ Shortcode Wishlist Icon
             left: -15px;
         }
     }
+}
+
+#adfy-wl-content-wrapper #adfy-wl-form #addonify-wishlist-table .adfy-wl-table-btn {
+    border-radius: 5px;
+    font-size: 1em;
+    padding: 7px 20px;
 }
 

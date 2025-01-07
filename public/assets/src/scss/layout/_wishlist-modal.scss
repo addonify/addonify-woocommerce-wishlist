@@ -2,30 +2,31 @@
 	#. Wishlist modal
   -------------------------------------------------------------------------- */
 
-.addonify-wishlist-modal-is-open {
+.adfy-wl-modal-content-is-open {
 
     overflow: hidden;
 }
 
-#addonify-wishlist-modal-wrapper {
+#adfy-wl-modal-content-wrapper {
 
     box-sizing: border-box;
     @include better_font_rendering();
 }
 
-#addonify-wishlist-modal-wrapper {
+#adfy-wl-modal-content-wrapper {
 
-    display: block;
+    display: none;
+    place-items: center;
     position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
-    @include visibility_hidden();
     @include transition_delay();
     background-color: var(--adfy_wishlist_popup_modal_overlay_bg_color);
+    z-index: 1000;
 
-    .addonify-wishlist-modal {
+    .adfy-wl-modal-content {
 
         position: relative;
         @include flex();
@@ -33,10 +34,9 @@
         justify-content: center;
         gap: 20px;
         width: 400px;
-        min-height: 400px;
+        min-height: 350px;
         text-align: center;
         padding: 30px;
-        margin: calc(( 100vh - 300px ) / 2 ) auto 0;
         border-radius: 5px;
         box-sizing: border-box;
         @include large_drop_shadow();
@@ -47,7 +47,7 @@
             padding: 20px;
         }
 
-        .adfy-model-close {
+        .adfy-wl-modal-close {
 
             position: absolute;
             top: 15px;
@@ -79,13 +79,13 @@
             }
         }
 
-        .addonify-wishlist-modal-body {
+        .adfy-wl-modal-body {
 
             @include flex();
             flex-direction: column;
             gap: 20px;
 
-            .adfy-wishlist-icon-entry {
+            .adfy-wl-modal-content-icon {
 
                 @include flex();
                 align-items: center;
@@ -104,7 +104,7 @@
                 }
             }
 
-            #addonify-wishlist-modal-response {
+            #adfy-wl-modal-content-response {
 
                 .response-text {
 
@@ -114,14 +114,14 @@
                 }
             }
 
-            .addonify-wishlist-modal-btns {
+            .adfy-wl-modal-content-btns {
 
                 @include flex();
                 gap: 20px;
                 flex-direction: column;
 
-                .adfy-wishlist-btn-link,
-                p.addonify-wishlist-add-to-cart .button {
+                .adfy-wl-modal-btn,
+                p.adfy-wl-add-to-cart .button {
 
                     @include flex();
                     align-items: center;
@@ -145,8 +145,8 @@
                     }
                 }
 
-                .adfy-wishlist-btn-link,
-                p.addonify-wishlist-add-to-cart .button {
+                .adfy-wl-modal-btn,
+                p.adfy-wl-add-to-cart .button {
 
                     text-decoration: none;
 
@@ -166,7 +166,11 @@
     }
 }
 
-.addonify-wishlist-modal-is-open #addonify-wishlist-modal-wrapper {
+body.adfy-wl-modal-content-is-open #adfy-wl-modal-content-wrapper {
+    display: grid;
+}
+
+.adfy-wl-modal-content-is-open #adfy-wl-modal-content-wrapper {
 
     z-index: var(--adfy_wishlist_popup_modal_zindex);
     backdrop-filter: blur( 5px );
@@ -178,9 +182,9 @@
 * Loading state.
 *
 */
-#addonify-wishlist-modal-wrapper.loading {
+#adfy-wl-modal-content-wrapper.loading {
 
-    .addonify-wishlist-modal {
+    .adfy-wl-modal-content {
 
         position: relative;
         @include flex();
@@ -213,7 +217,7 @@
 * Require login
 *
 */
-#addonify-wishlist-modal-wrapper.require-login {
+#adfy-wl-modal-content-wrapper.require-login {
 
     form {
 
@@ -227,13 +231,13 @@
 * Modal icon colors.
 *
 */
-#addonify-wishlist-modal-wrapper {
+#adfy-wl-modal-content-wrapper {
 
-    &.adfy-success-modal {
+    &.adfy-wl-modal-success {
 
-        .addonify-wishlist-modal  {
+        .adfy-wl-modal-content  {
 
-            .adfy-wishlist-icon-entry {
+            .adfy-wl-modal-content-icon {
 
                 .adfy-wishlist-icon:not([class*="icon-heart-"]) {
 
@@ -244,11 +248,11 @@
         }
     }
 
-    &.adfy-info-modal {
+    &.adfy-wl-modal-info {
 
-        .addonify-wishlist-modal  {
+        .adfy-wl-modal-content  {
 
-            .adfy-wishlist-icon-entry {
+            .adfy-wl-modal-content-icon {
 
                 .adfy-wishlist-icon {
 
@@ -261,9 +265,9 @@
 
     &.adfy-warning-modal {
 
-        .addonify-wishlist-modal  {
+        .adfy-wl-modal-content  {
 
-            .adfy-wishlist-icon-entry {
+            .adfy-wl-modal-content-icon {
 
                 .adfy-wishlist-icon {
 
@@ -274,11 +278,11 @@
         }
     }
 
-    &.adfy-error-modal {
+    &.adfy-wl-modal-error {
 
-         .addonify-wishlist-modal  {
+         .adfy-wl-modal-content  {
 
-            .adfy-wishlist-icon-entry {
+            .adfy-wl-modal-content-icon {
 
                 .adfy-wishlist-icon {
 

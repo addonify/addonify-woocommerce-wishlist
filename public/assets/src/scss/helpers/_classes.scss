@@ -2,12 +2,12 @@
 	Hide/show
   -------------------------------------------------------------------------- */
 
-.adfy-wishlist-hide {
+.adfy-wl-hide {
 
     display: none;
 }
 
-.adfy-wishlist-show {
+.adfy-wl-show {
 
     display: block;
 }
@@ -39,7 +39,7 @@
 	Notices
   -------------------------------------------------------------------------- */
 
-#addonify-wishlist-notice {
+#adfy-wl-notice {
 
    	position: relative;
 
@@ -91,4 +91,8 @@
 		align-items: center;
 		gap: 5px;
 	}
+}
+
+.screen-reader-text {
+	clip: rect(1px, 1px, 1px, 1px);
 }

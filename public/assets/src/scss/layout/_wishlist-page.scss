@@ -2,7 +2,7 @@
 	#. Wishlist page
   -------------------------------------------------------------------------- */
 
-#addonify-wishlist-page-container  {
+#adfy-wl-content-wrapper  {
 
     position: relative;
     min-height: 150px;
@@ -19,7 +19,7 @@
         }
 
         td {
-
+            vertical-align: middle;
             padding: 15px;
         }
 
@@ -45,7 +45,7 @@
 
             width: 50px;
 
-            .adfy-wishlist-btn {
+            .adfy-wl-btn {
 
                 display: inline-flex;
                 align-items: center;
@@ -74,7 +74,7 @@
 
         td.actions {
 
-            p.adfy-wishlist-btn {
+            p.adfy-wl-btn {
 
                 position: relative;
                 display: inline;
@@ -98,6 +98,11 @@
                     }
                 }
             }
+        }
+
+        .adfy-wl-table-toolbars {
+            display: flex;
+            justify-content: flex-end;
         }
     }
 
@@ -140,7 +145,7 @@
     * 
     */ 
 
-    #addonify-wishlist-notice  {
+    #adfy-wl-notice  {
 
         display: block;
 
@@ -172,7 +177,7 @@
 
 @media ( max-width: 768px ) {
 
-    #addonify-wishlist-page-container {
+    #adfy-wl-content-wrapper {
 
          #addonify-wishlist-table {
 
@@ -254,7 +259,7 @@
 
                     td.actions {
 
-                        .adfy-wishlist-btn {
+                        .adfy-wl-btn {
 
                             a {
 
@@ -274,8 +279,43 @@
     }
 
     // Toolbar
-    #addonify-wishlist-page-container #addonify-wishlist-page-toolbar {
+    #adfy-wl-content-wrapper #addonify-wishlist-page-toolbar {
 
         justify-content: center;
+    }
+}
+
+/*
+------------------------------------------------------------------
+    Wishlist page section
+------------------------------------------------------------------
+*/
+.adfy-wl-page-section {
+
+    text-align: center;
+
+    .adfy-wl-section-icon svg {
+        height: 4em;
+        width: 4em;
+    }
+
+    .adfy-wl-section-content {
+
+        margin-top: 30px;
+
+        .adfy-wl-section-header {
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 0;
+
+            a.adfy-wl-page-btn {
+                display: inline-block;
+                padding: 5px 30px;
+                text-decoration: none;
+            }
+        }
+        
     }
 }

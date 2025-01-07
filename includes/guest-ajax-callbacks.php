@@ -45,13 +45,13 @@ if ( ! function_exists( 'addonify_wishlist_get_guest_wishlist_content' ) ) {
 
 		if ( addonify_wishlist_get_option( 'show_sidebar' ) === '1' && $has_wishlist_sidebar ) {
 			ob_start();
-			do_action( 'addonify_wishlist_render_sidebar_loop', $wishlist_items );
+			do_action( 'addonify_wishlist_sidebar_products', $wishlist_items );
 			$response_data['sidebarContent'] = ob_get_clean();
 		}
 
 		if ( $has_wishlist_table ) {
 			ob_start();
-			do_action( 'addonify_wishlist_render_wishlist_page_loop', $wishlist_items );
+			do_action( 'addonify_wishlist_page_wishlist_products', $wishlist_items );
 			$response_data['tableContent'] = ob_get_clean();
 		}
 
@@ -109,7 +109,7 @@ if ( ! function_exists( 'addonify_wishlist_get_guest_sidebar_table_product_row' 
 
 		if ( $has_wishlist_sidebar ) {
 			ob_start();
-			do_action( 'addonify_wishlist_render_sidebar_product_row', $product );
+			do_action( 'addonify_wishlist_sidebar_product_row', $product );
 			$response_data['sidebarProductRowContent'] = ob_get_clean();
 		}
 

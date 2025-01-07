@@ -5,13 +5,13 @@
     $(document).ready(function () {
 
         let $body = $('body');
-        let $modal = $('#addonify-wishlist-modal-wrapper');
-        let $modal_response = $('#addonify-wishlist-modal-response');
-        let $sidebar_ul = $('ul.adfy-wishlist-sidebar-items-entry');
+        let $modal = $('#adfy-wl-modal-content-wrapper');
+        let $modal_response = $('#adfy-wl-modal-content-response');
+        let $sidebar_ul = $('ul.adfy-wl-sidebar-wl-items');
         let plugin_name = 'addonify-wishlist';
         let localDataExpiration = parseInt(addonifyWishlistJSObject.noOfDaysDataIsValid);   // local data expiration in days.
         let isLoggedIn = addonifyWishlistJSObject.isLoggedIn;
-        $('.addonify-add-to-wishlist-btn button.added-to-wishlist').attr('disabled', true);
+        $('.adfy-wl-add-to-wishlist button.added-to-wishlist').attr('disabled', true);
 
         if (!isLoggedIn) {
             guest_init();
@@ -27,7 +27,7 @@
          * Check if product is already in the cart.
          * If not call ajax function to add the product into the cart.
          */
-        $body.on('click', '.addonify-wishlist-ajax-add-to-wishlist', function (e) {
+        $body.on('click', '.adfy-wl-ajax-add-to-wishlist', function (e) {
             e.preventDefault();
             let addToWishlistButton = $(this);
             if (addToWishlistButton.hasClass('added-to-wishlist')) {
@@ -54,16 +54,16 @@
 
         // Close popup modal.
         $body.on('click', '#addonify-wishlist-close-modal-btn', function () {
-            $body.removeClass('addonify-wishlist-modal-is-open');
+            $body.removeClass('adfy-wl-modal-content-is-open');
         })
 
         // Close popup modal.
-        $body.on('click', '#addonify-wishlist-sticky-sidebar-overlay', function () {
+        $body.on('click', '#adfy-wl-sidebar-overlay', function () {
             $body.removeClass('addonify-wishlist-sticky-sidebar-is-visible');
         })
 
         // Toggle sidebar wishlist.
-        $body.on('click', '#addonify-wishlist-show-sidebar-btn, #close-adfy-wishlist-sidebar-button', function () {
+        $body.on('click', '#adfy-wl-sidebar-toggle-btn, #adfy-wl-sidebar-close-btn', function () {
             $body.toggleClass('addonify-wishlist-sticky-sidebar-is-visible');
         });
 
@@ -82,8 +82,8 @@
 
             let parentProductRow = '';
 
-            if (thisButton.hasClass('addonify-wishlist-sidebar-button')) {
-                parentProductRow = $('div#addonify-wishlist-sticky-sidebar-container').find('li[data-product_row="addonify-wishlist-sidebar-product-row-' + thisButton.val() + '"]');
+            if (thisButton.hasClass('adfy-wl-sidebar-btn')) {
+                parentProductRow = $('div#adfy-wl-sidebar-container').find('li[data-product_row="addonify-wishlist-sidebar-product-row-' + thisButton.val() + '"]');
             }
 
             if (thisButton.hasClass('addonify-wishlist-table-button')) {
@@ -158,7 +158,7 @@
             if ($('#addonify-wishlist-table').length > 0) {
                 parentProductRow = $('#addonify-wishlist-table').find('tr[data-product_row="addonify-wishlist-table-product-row-' + product_id + '"]');
             } else {
-                parentProductRow = $('div#addonify-wishlist-sticky-sidebar-container').find('li[data-product_row="addonify-wishlist-sidebar-product-row-' + product_id + '"]');
+                parentProductRow = $('div#adfy-wl-sidebar-container').find('li[data-product_row="addonify-wishlist-sidebar-product-row-' + product_id + '"]');
             }
             parentProductSiblings = parentProductRow.siblings().length;
 
@@ -185,18 +185,18 @@
             let addedToWishlistButtonLabel = addonifyWishlistJSObject.addedToWishlistButtonLabel;
 
             wishlist_products.forEach(function (value, index) {
-                $('button.adfy-wishlist-btn[data-product_id="' + value + '"]').find('span').html(addedToWishlistButtonLabel);
-                $('button.adfy-wishlist-btn[data-product_id="' + value + '"]').find('i').addClass('heart-style-one').removeClass('heart-o-style-one');
+                $('button.adfy-wl-btn[data-product_id="' + value + '"]').find('span').html(addedToWishlistButtonLabel);
+                $('button.adfy-wl-btn[data-product_id="' + value + '"]').find('i').addClass('heart-style-one').removeClass('heart-o-style-one');
             });
         }
 
         if (!isLoggedIn) {
             // actions on wishlist page.
-            if ($body.find('div#addonify-wishlist-page-container').length > 0) {
+            if ($body.find('div#adfy-wl-content-wrapper').length > 0) {
                 if (addonifyWishlistJSObject.requireLogin) {
-                    $('div#addonify-wishlist-page-container').html('<h3>' + addonifyWishlistJSObject.loginRequiredMessage + '</h3>');
+                    $('div#adfy-wl-content-wrapper').html('<h3>' + addonifyWishlistJSObject.loginRequiredMessage + '</h3>');
                 } else {
-                    $('div#addonify-wishlist-page-container').html('<div id="addonify-wishlist_spinner"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2 11h5v2H2zm15 0h5v2h-5zm-6 6h2v5h-2zm0-15h2v5h-2zM4.222 5.636l1.414-1.414 3.536 3.536-1.414 1.414zm15.556 12.728-1.414 1.414-3.536-3.536 1.414-1.414zm-12.02-3.536 1.414 1.414-3.536 3.536-1.414-1.414zm7.07-7.071 3.536-3.535 1.414 1.415-3.536 3.535z"></path></svg></div>');
+                    $('div#adfy-wl-content-wrapper').html('<div id="addonify-wishlist_spinner"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2 11h5v2H2zm15 0h5v2h-5zm-6 6h2v5h-2zm0-15h2v5h-2zM4.222 5.636l1.414-1.414 3.536 3.536-1.414 1.414zm15.556 12.728-1.414 1.414-3.536-3.536 1.414-1.414zm-12.02-3.536 1.414 1.414-3.536 3.536-1.414-1.414zm7.07-7.071 3.536-3.535 1.414 1.415-3.536 3.535z"></path></svg></div>');
                     //populate table
                     $.post(
                         addonifyWishlistJSObject.ajax_url,
@@ -206,7 +206,7 @@
                             nonce: addonifyWishlistJSObject.nonce
                         },
                         function (result) {
-                            $body.find('div#addonify-wishlist-page-container').replaceWith(result);
+                            $body.find('div#adfy-wl-content-wrapper').replaceWith(result);
                         }
                     );
 
@@ -249,9 +249,9 @@
                         nonce: addonifyWishlistJSObject.nonce
                     },
                     function (result) {
-                        $body.find('#addonify-wishlist-sticky-sidebar-container').replaceWith(result);
+                        $body.find('#adfy-wl-sidebar-container').replaceWith(result);
                         if (getProductids().length > 0) {
-                            $('#addonify-wishlist-show-sidebar-btn').removeClass('hidden');
+                            $('#adfy-wl-sidebar-toggle-btn').removeClass('hidden');
                         }
                     }
                 );
@@ -359,7 +359,7 @@
                         );
 
                         if (response.wishlist_count > 0) {
-                            $('#addonify-wishlist-show-sidebar-btn').removeClass('hidden');
+                            $('#adfy-wl-sidebar-toggle-btn').removeClass('hidden');
                         }
 
                         if (response.sidebar_data) {
@@ -370,7 +370,7 @@
                         // Update button label and icon of custom add to wishlist button.
                         if (!addToWishlistButton.hasClass('addonify-custom-wishlist-btn')) {
                             // Update button label.
-                            addToWishlistButton.find('span.addonify-wishlist-btn-label').text(addonifyWishlistJSObject.addedToWishlistText);
+                            addToWishlistButton.find('span.adfy-wl-add-to-wislist-label').text(addonifyWishlistJSObject.addedToWishlistText);
                             // Update button icon.
                             addToWishlistButton.find('i.icon.adfy-wishlist-icon').removeClass('heart-o-style-one').addClass('heart-style-one');
                         }
@@ -416,7 +416,7 @@
                     function (response) {
                         if (response) {
                             // update sidebar contents
-                            $('ul.adfy-wishlist-sidebar-items-entry').append(response.sidebar_data);
+                            $('ul.adfy-wl-sidebar-wl-items').append(response.sidebar_data);
                             sidebar_data = response.sidebar_data
                         }
                     }
@@ -434,13 +434,13 @@
                 );
 
                 if (wishlist.length > 0) {
-                    $('#addonify-wishlist-show-sidebar-btn').removeClass('hidden');
+                    $('#adfy-wl-sidebar-toggle-btn').removeClass('hidden');
                 }
 
                 // Update button label and icon of custom add to wishlist button.
                 if (!addToWishlistButton.hasClass('addonify-custom-wishlist-btn')) {
                     // Update button label.
-                    addToWishlistButton.find('span.addonify-wishlist-btn-label').text(addonifyWishlistJSObject.addedToWishlistText);
+                    addToWishlistButton.find('span.adfy-wl-add-to-wislist-label').text(addonifyWishlistJSObject.addedToWishlistText);
                     // Update button icon.
                     addToWishlistButton.find('i.icon.adfy-wishlist-icon').removeClass('heart-o-style-one').addClass('heart-style-one');
                 }
@@ -478,8 +478,8 @@
 
             let parentProductRow = '';
 
-            if ($('#addonify-wishlist-sticky-sidebar-container').length > 0) {
-                parentProductRow = $('#addonify-wishlist-sticky-sidebar-container').find('li[data-product_row="addonify-wishlist-sidebar-product-row-' + product_id + '"]');
+            if ($('#adfy-wl-sidebar-container').length > 0) {
+                parentProductRow = $('#adfy-wl-sidebar-container').find('li[data-product_row="addonify-wishlist-sidebar-product-row-' + product_id + '"]');
                 parentProductRow.addClass('loading');
             }
 
@@ -500,7 +500,7 @@
                         $(document).trigger('addonify_removed_from_wishlist', [{ productID: product_id, wishlistCount: response.wishlist_count }]);
 
                         if (response.wishlist_count <= 0) {
-                            $('#addonify-wishlist-show-sidebar-btn').addClass('hidden');
+                            $('#adfy-wl-sidebar-toggle-btn').addClass('hidden');
                         }
 
                         addonifyInitialWishlistButton(product_id);
@@ -525,8 +525,8 @@
         function addonifyLocalRemoveFromWishlist(thisButton) {
             let parentProductRow;
             let id_to_remove = parseInt(thisButton.val() ? thisButton.val() : thisButton.data('product_id'));
-            if ($('#addonify-wishlist-sticky-sidebar-container').length > 0) {
-                parentProductRow = $('#addonify-wishlist-sticky-sidebar-container').find('li[data-product_row="addonify-wishlist-sidebar-product-row-' + id_to_remove + '"]');
+            if ($('#adfy-wl-sidebar-container').length > 0) {
+                parentProductRow = $('#adfy-wl-sidebar-container').find('li[data-product_row="addonify-wishlist-sidebar-product-row-' + id_to_remove + '"]');
                 parentProductRow.addClass('loading');
             }
 
@@ -552,7 +552,7 @@
             $(document).trigger('addonify_removed_from_wishlist', [{ productID: id_to_remove, wishlistCount: product_ids.length }]);
 
             if (product_ids.length <= 0) {
-                $('#addonify-wishlist-show-sidebar-btn').addClass('hidden');
+                $('#adfy-wl-sidebar-toggle-btn').addClass('hidden');
             }
 
             addonifyInitialWishlistButton(id_to_remove);
@@ -577,19 +577,19 @@
             } else {
                 $('.addonify-view-wishlist-btn').css('display', 'block');
             }
-            $('.adfy-wishlist-icon-entry .adfy-wishlist-icon').hide();
+            $('.adfy-wl-modal-content-icon .adfy-wishlist-icon').hide();
             if (icon) {
                 // change icon
-                $('.adfy-wishlist-icon-entry .adfy-wishlist-icon.adfy-status-' + icon).show();
+                $('.adfy-wl-modal-content-icon .adfy-wishlist-icon.adfy-status-' + icon).show();
             }
             $modal_response.html("<p class='response-text'>" + response_text.replace('{product_name}', product_name) + "</p>");
-            $body.addClass('addonify-wishlist-modal-is-open');
+            $body.addClass('adfy-wl-modal-content-is-open');
         }
 
         // Display sidebar notifications.
         function addonifyWishlistSidebarNotification(message, product_name = '') {
 
-            let notice = $('#addonify-wishlist-sticky-sidebar-container .addonify-wishlist-ssc-footer');
+            let notice = $('#adfy-wl-sidebar-container .adfy-wl-ssc-footer');
 
             if (notice.length > 0) {
                 if (product_name !== '') {
@@ -610,8 +610,8 @@
 
         // Display empty wishlist text.
         function addonifyEmptyWishlistText(wishlistCount) {
-            let addonifyWishlistStickySidebarEle = $("#addonify-wishlist-sticky-sidebar-container");
-            let addonifyWishListEmptyTextEle = $("#addonify-wishlist-sticky-sidebar-container #addonify-empty-wishlist-para");
+            let addonifyWishlistStickySidebarEle = $("#adfy-wl-sidebar-container");
+            let addonifyWishListEmptyTextEle = $("#adfy-wl-sidebar-container #addonify-empty-wishlist-para");
 
             if (wishlistCount > 0) {
 
@@ -622,11 +622,11 @@
             } else {
 
                 if (addonifyWishlistStickySidebarEle.length > 0) {
-                    $('#addonify-wishlist-sticky-sidebar-container ul.adfy-wishlist-sidebar-items-entry').html('<p id="addonify-empty-wishlist-para">' + addonifyWishlistJSObject.emptyWishlistText + '</p>');
+                    $('#adfy-wl-sidebar-container ul.adfy-wl-sidebar-wl-items').html('<p id="addonify-empty-wishlist-para">' + addonifyWishlistJSObject.emptyWishlistText + '</p>');
                 }
 
-                if ($('#addonify-wishlist-page-container')) {
-                    $('#addonify-wishlist-page-container').html('<p id="addonify-empty-wishlist-para">' + addonifyWishlistJSObject.emptyWishlistText + '</p>');
+                if ($('#adfy-wl-content-wrapper')) {
+                    $('#adfy-wl-content-wrapper').html('<p id="addonify-empty-wishlist-para">' + addonifyWishlistJSObject.emptyWishlistText + '</p>');
                 }
             }
         }
@@ -634,13 +634,13 @@
         // Display intial state wishlist button label and icon.
         function addonifyInitialWishlistButton(productId) {
 
-            let wishlistButton = $('[data-product_id="' + productId + '"].addonify-add-to-wishlist-btn');
+            let wishlistButton = $('[data-product_id="' + productId + '"].adfy-wl-add-to-wishlist');
 
             // Update button label and icon of custom add to wishlist button.
             if (wishlistButton && !wishlistButton.hasClass('addonify-custom-wishlist-btn')) {
                 wishlistButton.removeClass('added-to-wishlist');
                 // Update button label.
-                wishlistButton.find('span.addonify-wishlist-btn-label').text(addonifyWishlistJSObject.initialAddToWishlistButtonLabel);
+                wishlistButton.find('span.adfy-wl-add-to-wislist-label').text(addonifyWishlistJSObject.initialAddToWishlistButtonLabel);
                 // Update button icon.
                 wishlistButton.find('i.icon.adfy-wishlist-icon').removeClass('heart-style-one').addClass('heart-o-style-one');
             }

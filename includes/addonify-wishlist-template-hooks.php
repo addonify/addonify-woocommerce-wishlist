@@ -9,22 +9,47 @@
  * @subpackage Addonify_Wishlist/includes
  */
 
-add_action( 'addonify_wishlist_render_wishlist_button', 'addonify_wishlist_render_add_to_wishlist_button' );
+/**
+ * Add to wishlist button.
+ *
+ * @see addonify_wishlist_add_to_wishlist_button_template()
+ */
+add_action( 'addonify_wishlist_add_to_wishlist_button', 'addonify_wishlist_add_to_wishlist_button_template' );
 
-add_action( 'addonify_wishlist_render_modal_wrapper', 'addonify_wishlist_render_modal_wrapper' );
-add_action( 'addonify_wishlist_render_sidebar_toggle_button', 'addonify_wishlist_render_sidebar_toggle_button' );
-add_action( 'addonify_wishlist_render_sidebar', 'addonify_wishlist_render_sidebar' );
-add_action( 'addonify_wishlist_render_sidebar_loop', 'addonify_wishlist_render_sidebar_loop' );
+/**
+ * Wishlist sidebar.
+ *
+ * @see addonify_wishlist_sidebar_wishlist_toggle_button_template()
+ * @see addonify_wishlist_sidebar_wishlist_content_template()
+ * @see addonify_wishlist_sidebar_wishlist_products_template()
+ */
+add_action( 'addonify_wishlist_sidebar_wishlist_toggle_button', 'addonify_wishlist_sidebar_wishlist_toggle_button_template' );
+add_action( 'addonify_wishlist_sidebar_wishlist_content', 'addonify_wishlist_sidebar_wishlist_content_template' );
+add_action( 'addonify_wishlist_sidebar_products', 'addonify_wishlist_sidebar_wishlist_products_template' );
 
-add_action( 'addonify_wishlist_render_shortcode_content', 'addonify_wishlist_render_wishlist_content' );
-add_action( 'addonify_wishlist_render_wishlist_page_loop', 'addonify_wishlist_render_wishlist_page_loop' );
+/**
+ * Wishlist page.
+ *
+ * @see addonify_wishlist_page_wishlist_content_template()
+ * @see addonify_wishlist_page_wishlist_products_template()
+ */
+add_action( 'addonify_wishlist_page_wishlist_content', 'addonify_wishlist_page_wishlist_content_template' );
+add_action( 'addonify_wishlist_page_wishlist_products', 'addonify_wishlist_page_wishlist_products_template' );
 
+/**
+ * Wishlist modals.
+ *
+ * @see addonify_wishlist_modal_wrapper_start_template()
+ * @see addonify_wishlist_modal_wrapper_end_template()
+ * @see addonify_wishlist_modal_template()
+ */
+add_action( 'addonify_wishlist_modal_wrapper_start', 'addonify_wishlist_modal_wrapper_start_template' );
+add_action( 'addonify_wishlist_modal_wrapper_end', 'addonify_wishlist_modal_wrapper_end_template' );
 
-add_action( 'addonify_wishlist_modal_wishlist_link', 'addonify_wishlist_render_popup_wishlist_link_button' );
-add_action( 'addonify_wishlist_modal_login_link', 'addonify_wishlist_render_popup_login_link_button' );
-add_action(
-	'addonify_wishlist_modal_empty_wishlist_confirm_button',
-	'addonify_wishlist_render_popup_empty_wishlist_confirm_button'
-);
-
-add_action( 'addonify_wishlist_render_modal_template', 'addonify_wishlist_modal_content_template' );
+add_action( 'addonify_wishlist_added_to_wishlist_modal', 'addonify_wishlist_modal_template' );
+add_action( 'addonify_wishlist_already_in_wishlist_modal', 'addonify_wishlist_modal_template' );
+add_action( 'addonify_wishlist_removed_from_wishlist_modal', 'addonify_wishlist_modal_template' );
+add_action( 'addonify_wishlist_confirm_clear_wishlist_modal', 'addonify_wishlist_modal_template' );
+add_action( 'addonify_wishlist_success_modal', 'addonify_wishlist_modal_template' );
+add_action( 'addonify_wishlist_error_modal', 'addonify_wishlist_modal_template' );
+add_action( 'addonify_wishlist_login_required_modal', 'addonify_wishlist_modal_template' );

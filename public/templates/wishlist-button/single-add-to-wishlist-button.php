@@ -9,10 +9,10 @@
  * @subpackage Addonify_Wishlist/public/templates
  */
 
-// direct access is disabled.
-defined( 'ABSPATH' ) || exit;
-
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 ?>
-<div class="addonify-add-to-wishlist-btn-wrapper">
-	<?php do_action( 'addonify_wishlist_render_wishlist_button' ); ?>
+<div class="adfy-wl-single-add-to-wislist-wrapper">
+	<?php do_action( 'addonify_wishlist_add_to_wishlist_button' ); ?>
 </div>

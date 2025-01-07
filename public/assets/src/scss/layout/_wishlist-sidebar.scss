@@ -2,7 +2,7 @@
 	#. Wishlist sidebar panel
   -------------------------------------------------------------------------- */
 
-#addonify-wishlist-sticky-sidebar-container {
+#adfy-wl-sidebar-container {
 
     --sidebar-zindex: calc( var(--adfy_wishlist_sidebar_overlay_zindex) + 5 );
 
@@ -29,13 +29,13 @@
         max-width: 90vw;
     }
 
-    .addonify-wishlist-ssc-body {
+    .adfy-wl-ssc-body {
 
         flex: 1 1 auto;
         @include flex();
         flex-direction: column;
 
-        .addonify-wishlist-scs-header {
+        .adfy-wl-ssc-header {
 
             flex: 0 0 auto;
             @include flex();
@@ -46,7 +46,7 @@
             padding-bottom: 10px;
             border-bottom: 1px solid var(--adfy_wishlist_border_color);
 
-            .adfy-wishlist-sidebar-title {
+            .adfy-wl-sidebar-title {
 
                 padding: 0;
                 margin: 0;
@@ -54,7 +54,7 @@
                 color: var(--adfy_wishlist_sidebar_modal_title_color);
             }
 
-            #close-adfy-wishlist-sidebar-button {
+            #adfy-wl-sidebar-close-btn {
 
                 fill: var(--adfy_wishlist_sidebar_modal_close_icon_color);
                 color: var(--adfy_wishlist_sidebar_modal_close_icon_color);
@@ -90,7 +90,7 @@
             }   
         }
 
-        #addonify-wishlist-sidebar-form {
+        #adfy-wl-sidebar-form {
 
             flex: 1 1 auto;
             position: relative;
@@ -99,7 +99,7 @@
             overflow: hidden;
             overflow-y: auto;
 
-            .adfy-wishlist-sidebar-items-entry {
+            .adfy-wl-sidebar-wl-items {
 
                 display: block;
                 position: absolute;
@@ -112,6 +112,10 @@
                 height: 100%;
                 width: auto;
                 list-style: none;
+
+                &.adfy-wl-hide {
+                    position: relative;
+                }
 
                 li {
 
@@ -215,7 +219,7 @@
                                     margin: 0;
                                 }
 
-                                .addonify-wishlist-add-to-cart {
+                                .adfy-wl-add-to-cart {
 
                                     @include flex();
                                     flex-direction: row;
@@ -242,7 +246,7 @@
 
                             .remove-item-column {
 
-                                .adfy-wishlist-btn {
+                                .adfy-wl-btn {
 
                                     font-size: 20px;
                                     font-weight: normal;
@@ -280,22 +284,22 @@
             }
         }
 
-        #addonify-wishlist-sidebar-form.ps--active-y {
+        #adfy-wl-sidebar-form.ps--active-y {
 
-            .adfy-wishlist-sidebar-items-entry {
+            .adfy-wl-sidebar-wl-items {
 
                 right: 20px;
             }
         }
     }
 
-    .addonify-wishlist-ssc-footer {
+    .adfy-wl-ssc-footer {
 
         @include flex();
         align-items: center;
         justify-content: center;
 
-        .addonify-wishlist-goto-wishlist-btn {
+        .adfy-wl-wishlist-page-link-btn {
 
             @include flex();
             align-items: center;
@@ -391,7 +395,7 @@
     }
 }
 
-#addonify-wishlist-show-sidebar-btn {
+#adfy-wl-sidebar-toggle-btn {
 
     --zindex: calc( var(--adfy_wishlist_popup_modal_zindex) - 1 );
 
@@ -470,7 +474,7 @@
     }
 }
 
-#addonify-wishlist-sticky-sidebar-overlay {
+#adfy-wl-sidebar-overlay {
 
     @include flex();
     align-items: stretch;
@@ -489,7 +493,7 @@
     @include transition_delay();
 }
 
-#addonify-wishlist-sticky-sidebar-container #addonify-wishlist_spinner {
+#adfy-wl-sidebar-container #addonify-wishlist_spinner {
 
     @include flex();
     align-items: center;
@@ -525,7 +529,7 @@
 
     overflow: hidden;
 
-    #addonify-wishlist-sticky-sidebar-overlay {
+    #adfy-wl-sidebar-overlay {
 
         visibility: visible;
         opacity: 1;
@@ -533,13 +537,13 @@
     }
 }
 
-#addonify-wishlist-show-sidebar-btn[class*="align-left"] {
+#adfy-wl-sidebar-toggle-btn[class*="align-left"] {
 
     right: auto;
     left: calc(var(--adfy_wishlist_sidebar_btn_position_offset) * 1px);
 }
 
-#addonify-wishlist-sticky-sidebar-container {
+#adfy-wl-sidebar-container {
 
     &[class*="align-left"]  {
 
@@ -556,7 +560,7 @@
 
 .addonify-wishlist-sticky-sidebar-is-visible {
 
-    #addonify-wishlist-sticky-sidebar-container {
+    #adfy-wl-sidebar-container {
 
         &[class*="align-left"]  {
 
@@ -571,4 +575,3 @@
         }        
     }
 }
-

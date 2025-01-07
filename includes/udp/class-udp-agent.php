@@ -194,7 +194,6 @@ class Udp_Agent {
 		// Redirect back to dashboard.
 		wp_safe_redirect( admin_url() );
 		exit;
-
 	}
 
 	// ----------------------------------------------

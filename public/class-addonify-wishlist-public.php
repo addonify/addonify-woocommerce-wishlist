@@ -381,7 +381,7 @@ class Addonify_Wishlist_Public {
 
 		wp_enqueue_style(
 			'perfect-scrollbar',
-			plugin_dir_url( __FILE__ ) . 'assets/build/css/conditional/perfect-scrollbar.css',
+			plugin_dir_url( __FILE__ ) . 'assets/libs/perfect-scrollbar/perfect-scrollbar.css',
 			array(),
 			$this->version,
 			'all'
@@ -395,23 +395,13 @@ class Addonify_Wishlist_Public {
 			'all'
 		);
 
-		if ( is_rtl() ) {
-			wp_enqueue_style(
-				$this->plugin_name,
-				plugin_dir_url( __FILE__ ) . 'assets/build/css/addonify-wishlist-public-rtl.css',
-				array(),
-				$this->version,
-				'all'
-			);
-		} else {
-			wp_enqueue_style(
-				$this->plugin_name,
-				plugin_dir_url( __FILE__ ) . 'assets/build/css/addonify-wishlist-public.css',
-				array(),
-				$this->version,
-				'all'
-			);
-		}
+		wp_enqueue_style(
+			$this->plugin_name,
+			plugin_dir_url( __FILE__ ) . 'assets/build/public.min.css',
+			array(),
+			$this->version,
+			'all'
+		);
 
 		$css  = ':root {';
 		$css .= '--adfy_wishlist_sidebar_btn_position_offset: ' . addonify_wishlist_get_option( 'sidebar_btn_position_offset' ) . ';';
@@ -448,7 +438,7 @@ class Addonify_Wishlist_Public {
 
 		wp_enqueue_script(
 			'perfect-scrollbar',
-			plugin_dir_url( __FILE__ ) . 'assets/build/js/conditional/perfect-scrollbar.min.js',
+			plugin_dir_url( __FILE__ ) . 'assets/libs/perfect-scrollbar/perfect-scrollbar.min.js',
 			null,
 			$this->version,
 			true
@@ -456,7 +446,7 @@ class Addonify_Wishlist_Public {
 
 		wp_enqueue_script(
 			$this->plugin_name . '-global',
-			plugin_dir_url( __FILE__ ) . 'assets/build/js/addonify-wishlist-global-public.min.js',
+			plugin_dir_url( __FILE__ ) . 'assets/build/global.min.js',
 			null,
 			$this->version,
 			true
@@ -464,7 +454,7 @@ class Addonify_Wishlist_Public {
 
 		wp_enqueue_script(
 			$this->plugin_name . '-common',
-			plugin_dir_url( __FILE__ ) . 'assets/build/js/conditional/common.min.js',
+			plugin_dir_url( __FILE__ ) . 'assets/build/common.min.js',
 			array( 'jquery' ),
 			$this->version,
 			true
@@ -561,7 +551,7 @@ class Addonify_Wishlist_Public {
 
 			wp_enqueue_script(
 				$this->plugin_name,
-				plugin_dir_url( __FILE__ ) . 'assets/build/js/conditional/addonify-wishlist-public-guest.min.js',
+				plugin_dir_url( __FILE__ ) . 'assets/build/guest.min.js',
 				array( 'jquery', 'addonify-wishlist-common' ),
 				$this->version,
 				true
@@ -591,7 +581,7 @@ class Addonify_Wishlist_Public {
 		} else {
 			wp_enqueue_script(
 				$this->plugin_name,
-				plugin_dir_url( __FILE__ ) . 'assets/build/js/conditional/addonify-wishlist-public.min.js',
+				plugin_dir_url( __FILE__ ) . 'assets/build/private.min.js',
 				array( 'jquery' ),
 				$this->version,
 				true
@@ -608,7 +598,6 @@ class Addonify_Wishlist_Public {
 			$script_object
 		);
 	}
-
 
 	/**
 	 * Callback function to handle AJAX request to add product into the wishlist.

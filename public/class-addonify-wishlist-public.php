@@ -373,9 +373,9 @@ class Addonify_Wishlist_Public {
 
 		wp_enqueue_style(
 			'perfect-scrollbar',
-			plugin_dir_url( __FILE__ ) . 'assets/libs/perfect-scrollbar/perfect-scrollbar.css',
+			plugin_dir_url( __FILE__ ) . 'assets/libs/perfect-scrollbar/perfect-scrollbar.min.css',
 			array(),
-			$this->version,
+			'1.5.6',
 			'all'
 		);
 
@@ -432,7 +432,7 @@ class Addonify_Wishlist_Public {
 			'perfect-scrollbar',
 			plugin_dir_url( __FILE__ ) . 'assets/libs/perfect-scrollbar/perfect-scrollbar.min.js',
 			null,
-			$this->version,
+			'1.5.6',
 			true
 		);
 

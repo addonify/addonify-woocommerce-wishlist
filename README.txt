@@ -4,7 +4,7 @@ Contributors: addonify
 Tags: wishlist, woocommerce wishlist, product wishlist, add to wishlist, save for later
 Requires at least: 6.3
 Tested up to: 6.7.1
-Stable tag: 2.0.13
+Stable tag: 2.0.14
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -149,9 +149,12 @@ Yes, there is. Use `[addonify_wishlist_button]` shortocde to display wishlist bu
 
 == Changelog ==
 
-= 2.0.14 - ?, 2025 =
+= 2.0.14 - ? January, 2025 =
 
 - Updated: Frontend templates and action hooks functions.
+- Tweak: Public assets (CSS & JS) path.
+- Tweak: Public assets (CSS & JS) file names.
+- Dev: Removed Gulp and added [Rollup](https://rollupjs.org/) to compile the public assets.
 
 = 2.0.13 - 13 December, 2024 =
 

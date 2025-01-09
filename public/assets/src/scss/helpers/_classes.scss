@@ -71,7 +71,7 @@
 		border-radius: 30px;
 		color: var(--adfy_wishlist_product_removed_notice_undo_btn_text_color);
 		background-color: var(--adfy_wishlist_product_removed_notice_undo_btn_bg_color);
-		@include transition_delay();
+		transition: all 0.5s ease;
 
 			&:hover {
 

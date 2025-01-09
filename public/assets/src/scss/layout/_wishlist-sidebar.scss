@@ -1,4 +1,4 @@
-/* -------------------------------------------------------------------------- 
+/* --------------------------------------------------------------------------
 	#. Wishlist sidebar panel
   -------------------------------------------------------------------------- */
 
@@ -20,8 +20,8 @@
     padding: 30px 20px 20px 20px;
     z-index: var(--sidebar-zindex);
     background-color: var(--adfy_wishlist_sidebar_modal_bg_color);
+    transition: all 0.5s ease;
     @include large_drop_shadow();
-    @include transition_delay();
     @include visibility_visible();
     @include breakpoint(mobile) {
 
@@ -87,7 +87,7 @@
                     transform: none;
                     text-decoration: none;
                 }
-            }   
+            }
         }
 
         #adfy-wl-sidebar-form {
@@ -319,7 +319,7 @@
             border-radius: 30px;
             box-shadow: none;
             text-decoration: none;
-            @include transition_delay();
+            transition: all 0.5s ease;
 
             .icon {
 
@@ -348,7 +348,7 @@
     /**
     *
     * Notice
-    * 
+    *
     */
 
     #addonify-wishlist-undo-deleted-product  {
@@ -429,7 +429,7 @@
     background: transparent;
     background-color: var(--adfy_wishlist_sidebar_modal_toggle_btn_bg_color);
     z-index: var(--zindex);
-    @include transition_delay();
+    transition: all 0.5s ease;
 
     .button-icon,
     .button-label {
@@ -444,7 +444,7 @@
     }
 
     .button-icon {
-        
+
         transform: rotate(-90deg);
 
         svg {
@@ -490,7 +490,7 @@
     opacity: 0;
     visibility: hidden;
     background-color: var(--adfy_wishlist_sidebar_modal_overlay_bg_color);
-    @include transition_delay();
+    transition: all 0.5s ease;
 }
 
 #adfy-wl-sidebar-container #addonify-wishlist_spinner {
@@ -508,7 +508,7 @@
     z-index: 100;
     backdrop-filter: blur(5px);
     background-color: var(--adfy_wishlist_sidebar_modal_spinner_bg_color);
-    @include transition_delay();
+    transition: all 0.5s ease;
 
     svg {
 
@@ -521,7 +521,7 @@
     }
 }
 
-/* -------------------------------------------------------------------------- 
+/* --------------------------------------------------------------------------
 	#. Visibility & Alignment
   -------------------------------------------------------------------------- */
 
@@ -572,6 +572,6 @@
 
             left: auto;
             right: 0;
-        }        
+        }
     }
 }

@@ -7,7 +7,7 @@
     color: var(--adfy_wishlist_wishlist_btn_text_color);
     background: transparent;
     background-color: var(--adfy_wishlist_wishlist_btn_bg_color);
-    @include transition_delay();
+    transition: all 0.5s ease;
 
     &:hover {
 
@@ -37,7 +37,7 @@ p.adfy-wishlist-btn .button,
     border-style: none;
     border-width: 0;
     border-color: transparent;
-    @include transition_delay();
+    transition: all 0.5s ease;
 
     &:focus,
     &:hover {
@@ -166,7 +166,7 @@ body.addonify-wishlist-btn-over-image .wc-block-product {
     fill: var(--adfy_wishlist_wishlist_btn_text_color);
     color: var(--adfy_wishlist_wishlist_btn_text_color);
     background-color: var(--adfy_wishlist_wishlist_btn_bg_color);
-    @include transition_delay();
+    transition: all 0.5s ease;
 
     .addonify-wishlist-icon {
 

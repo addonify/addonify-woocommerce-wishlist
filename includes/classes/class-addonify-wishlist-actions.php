@@ -224,7 +224,7 @@ if ( ! class_exists( 'Addonify_Wishlist_Actions' ) ) {
 		 * @param array $args Arguments.
 		 * @return array|false Wishlist id on success. Else false.
 		 */
-		public function create_wishlist( $args ) {
+		public function create_wishlist( $args = array() ) {
 
 			$defaults = [
 				'wishlist_name'       => apply_filters( 'addonify_wishlist_default_wishlist_name', esc_html__( 'My Wishlist', 'addonify-wishlist' ) ),

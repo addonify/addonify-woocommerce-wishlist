@@ -276,14 +276,14 @@ if ( ! function_exists( 'addonify_wishlist_wishlist_sidebar_v_2_options' ) ) {
 					),
 					'sidebar_modal_product_add_to_cart_label_color' => array(
 						'type'          => 'color',
-						'label'         => __( 'On hover Add to Cart Button label color', 'addonify-wishlist' ),
+						'label'         => __( 'Add to Cart Button label color', 'addonify-wishlist' ),
 						'isAlphaPicker' => true,
 						'className'     => '',
 						'value'         => addonify_wishlist_get_option( 'sidebar_modal_product_add_to_cart_label_color' ),
 					),
 					'sidebar_modal_product_add_to_cart_label_color_hover' => array(
 						'type'          => 'color',
-						'label'         => __( 'Add to Cart Button label color', 'addonify-wishlist' ),
+						'label'         => __( 'On hover Add to Cart Button label color', 'addonify-wishlist' ),
 						'isAlphaPicker' => true,
 						'className'     => '',
 						'value'         => addonify_wishlist_get_option( 'sidebar_modal_product_add_to_cart_label_color_hover' ),

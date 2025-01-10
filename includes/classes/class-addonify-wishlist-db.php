@@ -103,5 +103,67 @@ if ( ! class_exists( 'Addonify_Wishlist_DB' ) ) {
 
 			$wpdb->query( "delete from $wpdb->options where option_name regexp '" . ADDONIFY_WISHLIST_DB_INITIALS . ".*'" ); // phpcs:ignore
 		}
+
+		/**
+		 * Gets all wishlist from the table.
+		 *
+		 * @since 1.0.0
+		 *
+		 *  @param array $args Query arguments.
+		 */
+		public static function count_all_wishlists( $args = array() ) {
+			$from = isset( $args['from'] ) ? $args['from'] : ''; // From date should have 'YYYY-MM-DD' format.
+			$to   = isset( $args['to'] ) ? $args['to'] : ''; // From date should have 'YYYY-MM-DD' format.
+
+			$visibility = isset( $args['visibility'] ) ? $args['visibility'] : 'NULL';
+			global $wpdb;
+			$table_name = self::get_table_name();
+			$sql_query  = "SELECT COUNT(DISTINCT id) AS total FROM {$table_name}";
+
+			if ( $from && $to ) {
+				$sql_query .= " WHERE created_at BETWEEN '{$from}' AND '{$to}'";
+			}
+
+			if ( 'NULL' !== $visibility && $from && $to ) {
+				$sql_query .= " AND wishlist_visibility = '{$visibility}'";
+			}
+
+			$results = $wpdb->get_results( $sql_query, ARRAY_A ); // phpcs:ignore
+
+			return isset( $results[0]['total'] ) ? (int) $results[0]['total'] : 0;
+		}
+
+
+		/**
+		 * Gets all most repeated wishlist item from the table.
+		 *
+		 * @since 1.0.0
+		 *
+		 *  @param array $args Query arguments.
+		 */
+		public static function get_most_repeated_item( $args = array() ) {
+			$from = isset( $args['from'] ) ? $args['from'] : ''; // From date should have 'YYYY-MM-DD' format.
+			$to   = isset( $args['to'] ) ? $args['to'] : ''; // From date should have 'YYYY-MM-DD' format.
+
+			$order_by = isset( $args['order_by'] ) ? $args['order_by'] : 'DESC';
+
+			$visibility = isset( $args['visibility'] ) ? $args['visibility'] : 'NULL';
+			global $wpdb;
+			$table_name = self::get_table_name();
+			$sql_query  = "SELECT product_id, COUNT(product_id) AS total FROM {$table_name}";
+
+			if ( $from && $to ) {
+				$sql_query .= " WHERE created_at BETWEEN '{$from}' AND '{$to}'";
+			}
+
+			if ( 'NULL' !== $visibility && $from && $to ) {
+				$sql_query .= " AND wishlist_visibility = '{$visibility}'";
+			}
+			$sql_query .= "GROUP BY product_id HAVING COUNT(product_id) > 1
+			ORDER BY total {$order_by}";
+
+			$results = $wpdb->get_results( $sql_query, ARRAY_A ); // phpcs:ignore
+			return isset( $results[0] ) ? $results[0] : array();
+		}
 	}
 }

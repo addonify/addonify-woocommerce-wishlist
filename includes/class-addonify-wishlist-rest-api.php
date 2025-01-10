@@ -58,6 +58,26 @@ if ( ! class_exists( 'Addonify_Wishlist_Rest_API' ) ) {
 		 */
 		public function register_rest_endpoints() {
 
+			register_rest_route( // get wishlist data.
+				$this->rest_namespace,
+				'/stats/get_wishlist_number',
+				array(
+					'methods'             => 'Get',
+					'callback'            => array( $this, 'rest_handler_get_number_of_wishlists' ),
+					'permission_callback' => '__return_true',//array( $this, 'permission_callback' ),
+				)
+			);
+
+			register_rest_route( // get wishlist data.
+				$this->rest_namespace,
+				'/stats/get_popular_products',
+				array(
+					'methods'             => 'Get',
+					'callback'            => array( $this, 'rest_handler_get_popular_products' ),
+					'permission_callback' => '__return_true',//array( $this, 'permission_callback' ),
+				)
+			);
+
 			register_rest_route( // Get options.
 				$this->rest_namespace,
 				'/get_options',
@@ -151,6 +171,108 @@ if ( ! class_exists( 'Addonify_Wishlist_Rest_API' ) ) {
 			return addonify_wishlist_v_2_get_settings_fields();
 		}
 
+		/**
+		 * REST API endpoint handler to get wishlist data.
+		 *
+		 * @since 1.0.0
+		 * @access public
+		 *
+		 * @param \WP_REST_Request $request The request object.
+		 * @return \WP_REST_Response
+		 */
+		public function rest_handler_get_number_of_wishlists( $request ) {
+			$from = $request->get_param( 'start' );
+
+			$to = $request->get_param( 'end' );
+
+			$visibility = $request->get_param( 'visibility' ) ? sanitize_text_field( $request->get_param( 'visibility' ) ) : 'NULL';
+
+			$results = Addonify_Wishlist_DB::count_all_wishlists(
+				array(
+					'from'       => '2025-01-01',
+					'to'         => '2025-01-11',
+					'visibility' => $visibility,
+				)
+			);
+
+			if ( empty( $results ) ) {
+				return new WP_REST_Response(
+					array(
+						'success' => false,
+						'message' => esc_html__( 'No products views found.', 'addonify-quick-view-pro' ),
+					)
+				);
+			}
+
+			$response['success'] = true;
+			$response['message'] = esc_html__( 'Data fetched successfully.', 'addonify-quick-view-pro' );
+			$response['data']    = array(
+				'Number of Wishlists' => $results,
+			);
+
+			return new WP_REST_Response( $response );
+		}
+
+		/**
+		 * REST API endpoint handler to get popular products among the wishlists.
+		 *
+		 * @since 1.0.0
+		 * @access public
+		 *
+		 * @param \WP_REST_Request $request The request object.
+		 * @return \WP_REST_Response
+		 */
+		public function rest_handler_get_popular_products( $request ) {
+
+			$order_by = ( $request->get_param( 'order_by' ) ) ? strtoupper( sanitize_text_field( $request->get_param( 'order_by' ) ) ) : 'DESC';
+
+			$visibility = ( $request->get_param( 'visibility' ) ) ? sanitize_text_field( $request->get_param( 'visibility' ) ) : 'NULL';
+
+			if ( ! in_array( $order_by, array( 'ASC', 'DESC' ), true ) ) {
+				$order_by = 'DESC';
+			}
+
+			$from = $request->get_param( 'start' );
+
+			$to = $request->get_param( 'end' );
+
+			$results = Addonify_Wishlist_DB::get_most_repeated_item(
+				array(
+					'from'       => '2025-01-01',
+					'to'         => '2025-01-11',
+					'visibility' => $visibility,
+					'order_by'   => $order_by,
+				)
+			);
+
+			if ( is_array( $results ) ) {
+
+				if ( empty( $results ) ) {
+					return new WP_REST_Response(
+						array(
+							'success' => false,
+							'message' => esc_html__( 'No products views found.', 'addonify-quick-view-pro' ),
+						)
+					);
+				}
+
+				$response['success'] = true;
+				$response['message'] = esc_html__( 'Products views fetched successfully.', 'addonify-quick-view-pro' );
+				$response['data']    = array(
+					'product id' => $results['product_id'],
+					'count'      => $results['total'],
+				);
+
+				return new WP_REST_Response( $response );
+			} else {
+				return new WP_REST_Response(
+					array(
+						'success' => false,
+						'message' => esc_html__( 'Error fetching data.', 'addonify-quick-view-pro' ),
+					)
+				);
+			}
+		}
 
 		/**
 		 * Callback function to update all settings options values.
@@ -385,6 +507,20 @@ if ( ! class_exists( 'Addonify_Wishlist_Rest_API' ) ) {
 			} catch ( Exception $e ) {
 				error_log( $e->getMessage() ); //phpcs:ignore
 			}
+		}
+
+		/**
+		 * Checks if given date and format is valid.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $date Date.
+		 * @param string $format Date format.
+		 */
+		public function validate_date_format( $date, $format = 'Y-m-d' ) {
+
+			$d = DateTime::createFromFormat( 'Y-m-d', $date );
+			return $d && $d->format( $format ) === $date;
 		}
 	}
 }

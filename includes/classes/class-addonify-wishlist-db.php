@@ -112,13 +112,15 @@ if ( ! class_exists( 'Addonify_Wishlist_DB' ) ) {
 		 *  @param array $args Query arguments.
 		 */
 		public static function count_all_wishlists( $args = array() ) {
-			$from = isset( $args['from'] ) ? $args['from'] : ''; // From date should have 'YYYY-MM-DD' format.
-			$to   = isset( $args['to'] ) ? $args['to'] : ''; // From date should have 'YYYY-MM-DD' format.
+			$limit  = isset( $args['limit'] ) ? absint( $args['limit'] ) : 2;
+			$offset = isset( $args['offset'] ) ? absint( $args['offset'] ) : 0;
+			$from   = isset( $args['from'] ) ? $args['from'] : ''; // From date should have 'YYYY-MM-DD' format.
+			$to     = isset( $args['to'] ) ? $args['to'] : ''; // From date should have 'YYYY-MM-DD' format.
 
 			$visibility = isset( $args['visibility'] ) ? $args['visibility'] : 'NULL';
 			global $wpdb;
 			$table_name = self::get_table_name();
-			$sql_query  = "SELECT COUNT(DISTINCT id) AS total FROM {$table_name}";
+			$sql_query  = "SELECT COUNT(DISTINCT user_id) AS total FROM {$table_name}";
 
 			if ( $from && $to ) {
 				$sql_query .= " WHERE created_at BETWEEN '{$from}' AND '{$to}'";
@@ -127,6 +129,7 @@ if ( ! class_exists( 'Addonify_Wishlist_DB' ) ) {
 			if ( 'NULL' !== $visibility && $from && $to ) {
 				$sql_query .= " AND wishlist_visibility = '{$visibility}'";
 			}
+			$sql_query .= " LIMIT {$limit} OFFSET {$offset};";
 
 			$results = $wpdb->get_results( $sql_query, ARRAY_A ); // phpcs:ignore
 
@@ -135,15 +138,17 @@ if ( ! class_exists( 'Addonify_Wishlist_DB' ) ) {
 
 
 		/**
-		 * Gets all most repeated wishlist item from the table.
+		 * Gets most repeated wishlist item among the wishlistsfrom the table.
 		 *
 		 * @since 1.0.0
 		 *
 		 *  @param array $args Query arguments.
 		 */
 		public static function get_most_repeated_item( $args = array() ) {
-			$from = isset( $args['from'] ) ? $args['from'] : ''; // From date should have 'YYYY-MM-DD' format.
-			$to   = isset( $args['to'] ) ? $args['to'] : ''; // From date should have 'YYYY-MM-DD' format.
+			$limit  = isset( $args['limit'] ) ? absint( $args['limit'] ) : 2;
+			$offset = isset( $args['offset'] ) ? absint( $args['offset'] ) : 0;
+			$from   = isset( $args['from'] ) ? $args['from'] : ''; // From date should have 'YYYY-MM-DD' format.
+			$to     = isset( $args['to'] ) ? $args['to'] : ''; // From date should have 'YYYY-MM-DD' format.
 
 			$order_by = isset( $args['order_by'] ) ? $args['order_by'] : 'DESC';
 
@@ -160,10 +165,10 @@ if ( ! class_exists( 'Addonify_Wishlist_DB' ) ) {
 				$sql_query .= " AND wishlist_visibility = '{$visibility}'";
 			}
 			$sql_query .= "GROUP BY product_id HAVING COUNT(product_id) > 1
-			ORDER BY total {$order_by}";
+			ORDER BY total {$order_by} LIMIT {$limit} OFFSET {$offset}";
 
 			$results = $wpdb->get_results( $sql_query, ARRAY_A ); // phpcs:ignore
-			return isset( $results[0] ) ? $results[0] : array();
+			return $results;
 		}
 	}
 }

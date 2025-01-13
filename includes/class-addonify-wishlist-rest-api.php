@@ -199,13 +199,13 @@ if ( ! class_exists( 'Addonify_Wishlist_Rest_API' ) ) {
 				return new WP_REST_Response(
 					array(
 						'success' => false,
-						'message' => esc_html__( 'No products views found.', 'addonify-quick-view-pro' ),
+						'message' => esc_html__( 'No data found.', 'addonify-wishlist' ),
 					)
 				);
 			}
 
 			$response['success'] = true;
-			$response['message'] = esc_html__( 'Data fetched successfully.', 'addonify-quick-view-pro' );
+			$response['message'] = esc_html__( 'Data fetched successfully.', 'addonify-wishlist' );
 			$response['data']    = array(
 				'Number of Wishlists' => $results,
 			);
@@ -257,7 +257,7 @@ if ( ! class_exists( 'Addonify_Wishlist_Rest_API' ) ) {
 					return new WP_REST_Response(
 						array(
 							'success' => false,
-							'message' => esc_html__( 'No products views found.', 'addonify-quick-view-pro' ),
+							'message' => esc_html__( 'No products found.', 'addonify-wishlist' ),
 						)
 					);
 				}
@@ -275,7 +275,7 @@ if ( ! class_exists( 'Addonify_Wishlist_Rest_API' ) ) {
 				);
 
 				$response['success'] = true;
-				$response['message'] = esc_html__( 'Products views fetched successfully.', 'addonify-quick-view-pro' );
+				$response['message'] = esc_html__( 'Products fetched successfully.', 'addonify-wishlist' );
 				$response['data']    = array(
 					'popular_products' => $popular_products,
 				);
@@ -285,7 +285,7 @@ if ( ! class_exists( 'Addonify_Wishlist_Rest_API' ) ) {
 				return new WP_REST_Response(
 					array(
 						'success' => false,
-						'message' => esc_html__( 'Error fetching data.', 'addonify-quick-view-pro' ),
+						'message' => esc_html__( 'Error fetching data.', 'addonify-wishlist' ),
 					)
 				);
 			}

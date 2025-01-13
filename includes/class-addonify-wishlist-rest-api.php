@@ -228,6 +228,10 @@ if ( ! class_exists( 'Addonify_Wishlist_Rest_API' ) ) {
 
 			$visibility = ( $request->get_param( 'visibility' ) ) ? sanitize_text_field( $request->get_param( 'visibility' ) ) : 'NULL';
 
+			$limit = ( $request->get_param( 'limit' ) ) ? absint( $request->get_param( 'limit' ) ) : '2';
+
+			$offset = ( $request->get_param( 'offset' ) ) ? absint( $request->get_param( 'offset' ) ) : '0';
+
 			if ( ! in_array( $order_by, array( 'ASC', 'DESC' ), true ) ) {
 				$order_by = 'DESC';
 			}
@@ -242,6 +246,8 @@ if ( ! class_exists( 'Addonify_Wishlist_Rest_API' ) ) {
 					'to'         => '2025-01-11',
 					'visibility' => $visibility,
 					'order_by'   => $order_by,
+					'limit'      => $limit,
+					'offset'     => $offset,
 				)
 			);
 
@@ -256,11 +262,22 @@ if ( ! class_exists( 'Addonify_Wishlist_Rest_API' ) ) {
 					);
 				}
 
+				$popular_products = array_map(
+					function ( $popular_products ) {
+						$priduct_id = $popular_products['product_id'];
+						$count      = $popular_products['total'];
+						return array(
+							'product_id' => $priduct_id,
+							'count'      => $count,
+						);
+					},
+					$results,
+				);
+
 				$response['success'] = true;
 				$response['message'] = esc_html__( 'Products views fetched successfully.', 'addonify-quick-view-pro' );
 				$response['data']    = array(
-					'product id' => $results['product_id'],
-					'count'      => $results['total'],
+					'popular_products' => $popular_products,
 				);
 
 				return new WP_REST_Response( $response );

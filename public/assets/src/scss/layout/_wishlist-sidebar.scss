@@ -221,25 +221,16 @@
 
                                 .adfy-wl-add-to-cart {
 
-                                    @include flex();
-                                    flex-direction: row;
-                                    gap: 10px;
-                                    justify-content: flex-start;
+                                    margin: 0;
+                                    color: var(--adfy_wishlist_sidebar_modal_product_add_to_cart_label_color);
+                                    background: transparent;
+                                    background-color: var(--adfy_wishlist_sidebar_modal_product_add_to_cart_bg_color);
 
-                                    a.button,
-                                    a.added_to_cart  {
+                                    &:hover {
 
-                                        margin: 0;
-                                        color: var(--adfy_wishlist_sidebar_modal_product_add_to_cart_label_color);
+                                        color: var(--adfy_wishlist_sidebar_modal_product_add_to_cart_label_color_hover);
                                         background: transparent;
-                                        background-color: var(--adfy_wishlist_sidebar_modal_product_add_to_cart_bg_color);
-
-                                        &:hover {
-
-                                            color: var(--adfy_wishlist_sidebar_modal_product_add_to_cart_label_color_hover);
-                                            background: transparent;
-                                            background-color: var(--adfy_wishlist_sidebar_modal_product_add_to_cart_bg_color_hover);
-                                        }
+                                        background-color: var(--adfy_wishlist_sidebar_modal_product_add_to_cart_bg_color_hover);
                                     }
                                 }
                             }

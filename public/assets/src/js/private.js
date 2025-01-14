@@ -53,7 +53,12 @@
 								currentRemoveFromWishlistButton = currentAddToWishlistButton;
 								addonifyRemoveFromWishlist();
 							} else {
-								addonifyWishlistInit.displayModal(addonifyWishlistJSObject.alreadyInWishlistModal);
+								addonifyWishlistInit.displayModal(
+									addonifyWishlistJSObject.alreadyInWishlistModal,
+									{
+										'product_name': productName
+									}
+								);
 							}
 						} else {
 							// Call function to add product into wishlist.

@@ -181,19 +181,45 @@ if ( ! class_exists( 'Addonify_Wishlist_Rest_API' ) ) {
 		 * @return \WP_REST_Response
 		 */
 		public function rest_handler_get_number_of_wishlists( $request ) {
+
+			$query_args = array();
+
 			$from = $request->get_param( 'start' );
 
 			$to = $request->get_param( 'end' );
 
+			if ( empty( $from ) && ! empty( $to ) ) {
+				$date = new DateTime( $to ); // If from date is not set then set 5 days todays date minus 5 days.
+				$date->modify( '-5 days' );
+				$from = $date->format( 'Y-m-d' );
+			}
+
+			if ( empty( $to ) && ! empty( $from ) ) {
+				$date = new DateTime( $from ); // If from date is not set then set 5 days todays date minus 5 days.
+				$date->modify( '5 days' );
+				$to = $date->format( 'Y-m-d' );
+			}
+
+			if ( empty( $from ) && empty( $to ) ) {
+				$date = new DateTime(); // If from date is not set then set 5 days todays date minus 5 days.
+				$date->modify( '-5 days' );
+				$from = $date->format( 'Y-m-d' );
+				$to   = gmdate( 'Y-m-d' );
+			}
+
+			if ( $from && $this->validate_date_format( $from ) ) {
+				$query_args['from'] = $from;
+			}
+
+			if ( $to && $this->validate_date_format( $to ) ) {
+				$query_args['to'] = $to;
+			}
+
 			$visibility = $request->get_param( 'visibility' ) ? sanitize_text_field( $request->get_param( 'visibility' ) ) : 'NULL';
 
-			$results = Addonify_Wishlist_DB::count_all_wishlists(
-				array(
-					'from'       => '2025-01-01',
-					'to'         => '2025-01-11',
-					'visibility' => $visibility,
-				)
-			);
+			$query_args['visibility'] = $visibility;
+
+			$results = Addonify_Wishlist_DB::count_all_wishlists( $query_args );
 
 			if ( empty( $results ) ) {
 				return new WP_REST_Response(
@@ -224,6 +250,8 @@ if ( ! class_exists( 'Addonify_Wishlist_Rest_API' ) ) {
 		 */
 		public function rest_handler_get_popular_products( $request ) {
 
+			$query_args = array();
+
 			$order_by = ( $request->get_param( 'order_by' ) ) ? strtoupper( sanitize_text_field( $request->get_param( 'order_by' ) ) ) : 'DESC';
 
 			$visibility = ( $request->get_param( 'visibility' ) ) ? sanitize_text_field( $request->get_param( 'visibility' ) ) : 'NULL';
@@ -240,16 +268,42 @@ if ( ! class_exists( 'Addonify_Wishlist_Rest_API' ) ) {
 
 			$to = $request->get_param( 'end' );
 
-			$results = Addonify_Wishlist_DB::get_most_repeated_item(
-				array(
-					'from'       => '2025-01-01',
-					'to'         => '2025-01-11',
-					'visibility' => $visibility,
-					'order_by'   => $order_by,
-					'limit'      => $limit,
-					'offset'     => $offset,
-				)
-			);
+			if ( empty( $from ) && ! empty( $to ) ) {
+				$date = new DateTime( $to ); // If from date is not set then set 5 days todays date minus 15 days.
+				$date->modify( '-5 days' );
+				$from = $date->format( 'Y-m-d' );
+			}
+
+			if ( empty( $to ) && ! empty( $from ) ) {
+				$date = new DateTime( $from ); // If from date is not set then set 5 days todays date minus 15 days.
+				$date->modify( '5 days' );
+				$to = $date->format( 'Y-m-d' );
+			}
+
+			if ( empty( $from ) && empty( $to ) ) {
+				$date = new DateTime(); // If from date is not set then set 5 days todays date minus 15 days.
+				$date->modify( '-5 days' );
+				$from = $date->format( 'Y-m-d' );
+				$to   = gmdate( 'Y-m-d' );
+			}
+
+			if ( $from && $this->validate_date_format( $from ) ) {
+				$query_args['from'] = $from;
+			}
+
+			if ( $to && $this->validate_date_format( $to ) ) {
+				$query_args['to'] = $to;
+			}
+
+			$query_args['visibility'] = $visibility;
+
+			$query_args['order_by'] = $order_by;
+
+			$query_args['limit'] = $limit;
+
+			$query_args['offset'] = $offset;
+
+			$results = Addonify_Wishlist_DB::get_most_repeated_item( $query_args );
 
 			if ( is_array( $results ) ) {
 

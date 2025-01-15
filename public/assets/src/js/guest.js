@@ -280,7 +280,12 @@
 									addonifyLocalRemoveFromWishlist();
 								} else {
 									// Display already in the wishlist modal.
-									addonifyWishlistInit.displayModal(addonifyWishlistJSObject.alreadyInWishlistModal);
+									addonifyWishlistInit.displayModal(
+										addonifyWishlistJSObject.alreadyInWishlistModal,
+										{
+											'product_name': productName
+										}
+									);
 								}
 							} else {
 								// Call funtion to add the product into the wishlist.

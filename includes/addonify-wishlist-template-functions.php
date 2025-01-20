@@ -182,7 +182,6 @@ if ( ! function_exists( 'addonify_wishlist_add_to_cart_button_template' ) ) {
 
 		$defaults = array(
 			'quantity'              => 1,
-			'aria-describedby_text' => $product->add_to_cart_aria_describedby(),
 			'attributes'            => array(
 				'data-product_id'   => $product_id,
 				'data-product_name' => $product->get_name(),
@@ -206,8 +205,6 @@ if ( ! function_exists( 'addonify_wishlist_add_to_cart_button_template' ) ) {
 			$args['attributes']['aria-label'] = wp_strip_all_tags( $args['attributes']['aria-label'] );
 		}
 
-		$aria_describedby = isset( $args['aria-describedby_text'] ) ? sprintf( 'aria-describedby="woocommerce_loop_add_to_cart_link_describedby_%s"', esc_attr( $product_id ) ) : '';
-
 		$class = implode(
 			' ',
 			array_filter(
@@ -228,9 +225,8 @@ if ( ! function_exists( 'addonify_wishlist_add_to_cart_button_template' ) ) {
 		echo apply_filters( // phpcs:ignore
 			'addonify_wishlist_add_to_cart_link',
 			sprintf(
-				'<a href="%s" %s data-quantity="%s" class="%s" %s>%s</a>',
+				'<a href="%s" data-quantity="%s" class="%s" %s>%s</a>',
 				esc_url( $product->add_to_cart_url() ),
-				$aria_describedby,
 				esc_attr( isset( $args['quantity'] ) ? $args['quantity'] : 1 ),
 				esc_attr( isset( $class ) ? $class : 'button' ),
 				isset( $args['attributes'] ) ? wc_implode_html_attributes( $args['attributes'] ) : '',
@@ -239,14 +235,6 @@ if ( ! function_exists( 'addonify_wishlist_add_to_cart_button_template' ) ) {
 			$product,
 			$args
 		);
-
-		if ( isset( $args['aria-describedby_text'] ) ) {
-			?>
-			<span id="woocommerce_loop_add_to_cart_link_describedby_<?php echo esc_attr( $product_id ); ?>" class="screen-reader-text">
-				<?php echo esc_html( $args['aria-describedby_text'] ); ?>
-			</span>
-			<?php
-		}
 	}
 
 	add_action( 'addonify_wishlist_add_to_cart_button', 'addonify_wishlist_add_to_cart_button_template', 10, 2 );

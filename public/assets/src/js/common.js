@@ -184,6 +184,7 @@
 						} else {
 							if (buttonStatus === 'added-to-wishlist') {
 								let addedToWishlistButtonLabel = settings.addedToWishlistButtonLabel;
+								
 								if (addedToWishlistButtonLabel.includes('{wishlist_name}')) {
 									addedToWishlistButtonLabel = addedToWishlistButtonLabel.replace('{wishlist_name}', wishlistName);
 								}

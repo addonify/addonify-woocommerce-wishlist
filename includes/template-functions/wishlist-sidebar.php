@@ -172,7 +172,7 @@ if ( ! function_exists( 'addonify_wishlist_sidebar_product_template' ) ) {
 								'addonify_wishlist_add_to_cart_button',
 								$product,
 								array(
-									'class' => 'adfy-wl-btn adfy-wl-table-btn adfy-wl-add-to-cart',
+									'class' => 'adfy-wl-btn adfy-wl-sidebar-btn adfy-wl-add-to-cart',
 								)
 							);
 							?>
